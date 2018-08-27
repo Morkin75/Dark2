@@ -211,7 +211,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                 casillasMapa[x][y].setHorizontalAlignment(CENTER);
                 casillasMapa[x][y].setForeground(Color.RED);
                 casillasMapa[x][y].setOpaque(true);
-                casillasMapa[x][y].setBackground(Color.LIGHT_GRAY);
+                casillasMapa[x][y].setBackground(Color.LIGHT_GRAY);//
                 //casillasMapa[x][y].setBorder();
             }
         }
