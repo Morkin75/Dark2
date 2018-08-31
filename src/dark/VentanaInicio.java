@@ -50,8 +50,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         //Rellenamos los JLabel
         rellenarMapa();
         
+        //Indicamos el color del separador
+        separador1.setBackground(Color.BLUE);
+        separador2.setBackground(Color.BLUE);
         
-        
+        //jTabbedPane1.add("Hola", jScrollMapa);
         
     }
     
@@ -59,29 +62,6 @@ public class VentanaInicio extends javax.swing.JFrame {
     public void paint(Graphics g) {
         
         super.paint(g);
-        
-        //Lineas Horizontales
-        //g.setColor(new Color(20,20,20)); g.drawLine(70, 82, 870, 82); g.drawLine(70, 102, 870, 102);
-        //g.drawLine(70, 122, 870, 122); g.drawLine(70, 142, 870, 142); g.drawLine(70, 162, 870, 162);
-        //g.drawLine(70, 182, 870, 182); g.drawLine(70, 202, 870, 202); g.drawLine(70, 222, 870, 222);
-        //g.drawLine(70, 242, 870, 242); g.drawLine(70, 262, 870, 262); g.drawLine(70, 282, 870, 282);
-        //g.drawLine(70, 302, 870, 302); g.drawLine(70, 322, 870, 322); g.drawLine(70, 342, 870, 342);
-        //g.drawLine(70, 362, 870, 362);
-        
-        //Lineas Verticales
-        //g.drawLine(95, 62, 95, 381); g.drawLine(120, 62, 120, 381); g.drawLine(145, 62, 145, 381);
-        //g.drawLine(170, 62, 170, 381); g.drawLine(195, 62, 195, 381); g.drawLine(220, 62, 220, 381);
-        //g.drawLine(245, 62, 245, 381); g.drawLine(270, 62, 270, 381); g.drawLine(295, 62, 295, 381);
-        //g.drawLine(320, 62, 320, 381); g.drawLine(345, 62, 345, 381); g.drawLine(370, 62, 370, 381);
-        //g.drawLine(395, 62, 395, 381); g.drawLine(420, 62, 420, 381); g.drawLine(445, 62, 445, 381);
-        //g.drawLine(470, 62, 470, 381); g.drawLine(495, 62, 495, 381); g.drawLine(520, 62, 520, 381);
-        //g.drawLine(545, 62, 545, 381); g.drawLine(570, 62, 570, 381); g.drawLine(595, 62, 595, 381);
-        //g.drawLine(620, 62, 620, 381); g.drawLine(645, 62, 645, 381); g.drawLine(670, 62, 670, 381);
-        //g.drawLine(695, 62, 695, 381); g.drawLine(720, 62, 720, 381); g.drawLine(745, 62, 745, 381);
-        //g.drawLine(770, 62, 770, 381); g.drawLine(795, 62, 795, 381); g.drawLine(820, 62, 820, 381);
-        //g.drawLine(845, 62, 845, 381);
-        
-        //No se usa
         
     }
 
@@ -94,36 +74,31 @@ public class VentanaInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollMapa = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
+        separador1 = new javax.swing.JSeparator();
+        separador2 = new javax.swing.JSeparator();
+        jScrollJuego = new javax.swing.JScrollPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(20, 20));
         setName("miFrame"); // NOI18N
 
-        panel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PJ1"));
-        panel1.setToolTipText("Personaje1");
-        panel1.setPreferredSize(new java.awt.Dimension(80, 80));
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 68, Short.MAX_VALUE)
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 56, Short.MAX_VALUE)
-        );
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jScrollMapa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jScrollPane1MousePressed(evt);
+                jScrollMapaMousePressed(evt);
             }
         });
 
@@ -140,47 +115,132 @@ public class VentanaInicio extends javax.swing.JFrame {
             .addGap(0, 530, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(jPanel1);
+        jScrollMapa.setViewportView(jPanel1);
+
+        separador1.setOpaque(true);
+
+        separador2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jScrollJuego.setName("jScrollJuego"); // NOI18N
+
+        jTabbedPane1.setName(""); // NOI18N
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Fuerza", "Velocidad", "Energia", "Agilidad", "Vida"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jTabbedPane1.addTab("Personajes", jScrollPane2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        jTabbedPane1.addTab("Dominios", jScrollPane3);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable4);
+
+        jTabbedPane1.addTab("Objetos", jScrollPane4);
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable5);
+
+        jTabbedPane1.addTab("Acciones", jScrollPane5);
+
+        jScrollJuego.setViewportView(jTabbedPane1);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(separador1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(290, 290, 290)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(386, Short.MAX_VALUE))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(separador2))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jScrollPane1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MousePressed
+    private void jScrollMapaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollMapaMousePressed
         System.out.println("Pulsado:" + jPanel1.getMousePosition().toString() + " - " 
                 + jPanel1.getMousePosition().x + ":" + jPanel1.getMousePosition().y);
         posMapaX = jPanel1.getMousePosition().x/33;
@@ -192,15 +252,27 @@ public class VentanaInicio extends javax.swing.JFrame {
         //Cambiamos de color la casilla marcada
         limpiarMapa();
         casillasMapa[posMapaX][posMapaY].setBackground(Color.CYAN);
-    }//GEN-LAST:event_jScrollPane1MousePressed
+    }//GEN-LAST:event_jScrollMapaMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JComboBox<String> jComboBox1;
+    public javax.swing.JMenu jMenu1;
+    public javax.swing.JMenu jMenu2;
+    public javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JPanel jPanel1;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JSeparator jSeparator1;
-    public javax.swing.JPanel panel1;
+    public javax.swing.JScrollPane jScrollJuego;
+    public javax.swing.JScrollPane jScrollMapa;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JTable jTable2;
+    public javax.swing.JTable jTable3;
+    public javax.swing.JTable jTable4;
+    public javax.swing.JTable jTable5;
+    public javax.swing.JSeparator separador1;
+    public javax.swing.JSeparator separador2;
     // End of variables declaration//GEN-END:variables
 
     public void inicializarMapa() {

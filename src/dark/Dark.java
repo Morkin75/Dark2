@@ -40,7 +40,7 @@ public class Dark {
         ventanaInicio.setResizable(false);
         ventanaInicio.setVisible(true);
         
-        ventanaInicio.panel1.setBackground(Color.red);
+        ventanaInicio.jScrollMapa.setBackground(Color.red);
         //ventanaInicio.jPanel1.setPreferredSize(new Dimension(400, 200));
         
         //ventanaInicio.dibujaLinea(g);
