@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,9 +25,13 @@ public class VentanaInicio extends javax.swing.JFrame {
 
     //Array de casillas del mapa
     public JLabel[][] casillasMapa;
+    public JSeparator separador3;
     
     //Graphics cuadrado = null;
     BufferedImage cuadrado;
+    
+    //El modelo de la tabla de Acciones
+    DefaultTableModel acciones = new DefaultTableModel();
     
     int posMapaX, posMapaY;
     /**
@@ -41,6 +47,9 @@ public class VentanaInicio extends javax.swing.JFrame {
         //getGraphics().drawLine(10, 10, 200, 200);
         //repaint();
         
+        //Inicializamos el separador
+        separador3 = new JSeparator();
+        
         cuadrado = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
         
         //Creamos el mapa
@@ -52,9 +61,28 @@ public class VentanaInicio extends javax.swing.JFrame {
         
         //Indicamos el color del separador
         separador1.setBackground(Color.BLUE);
+        separador2.setOpaque(true);
         separador2.setBackground(Color.BLUE);
+        separador2.setOrientation(SwingConstants.VERTICAL);
+        //System.out.println(separador2.getLocation().x);
+        //System.out.println(separador2.getLocation().y);
+        //System.out.println(separador2.getSize().toString());
         
+        separador2.setSize(12, 255);
+        separador2.setLocation(606, 400);
+        //separador3.setSize(1, 255);
+        
+        System.out.println(separador2.getLocation().x);
+        System.out.println(separador2.getLocation().y);
+        System.out.println(separador2.getSize().toString());
         //jTabbedPane1.add("Hola", jScrollMapa);
+        
+        //Preparamos el modelo de la tabla de Acciones
+        acciones.addColumn("Número");
+        acciones.addColumn("Acción");
+        acciones.addColumn("Descripción");
+        
+        //Dark.con.mostrarAcciones();
         
     }
     
@@ -127,17 +155,17 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Fuerza", "Velocidad", "Energia", "Agilidad", "Vida"
+                "Nombre", "Fuerza", "Velocidad", "Energia", "Agilidad", "Vida", "Oro"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -178,17 +206,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Objetos", jScrollPane4);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable5.setModel(acciones);
         jScrollPane5.setViewportView(jTable5);
 
         jTabbedPane1.addTab("Acciones", jScrollPane5);
@@ -217,7 +235,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(378, Short.MAX_VALUE))
         );
@@ -227,14 +245,15 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
+                .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(separador2))
-                .addContainerGap())
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();

@@ -8,7 +8,9 @@ package dark;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author manueljesusgarcialopez
@@ -21,6 +23,9 @@ public class Dark {
     //Mapa de inicio
     public int[][] mapa = new int[32][16];
     
+    //Objeto de conexion
+    public static Conector con;
+    
     
     /**
      * @param args the command line arguments
@@ -28,7 +33,12 @@ public class Dark {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        
+        //Intentamos la conexion con la BBDD
+        //Creamos el conector
+        con = new Conector();
+        //Abrimos la conexión
+        con.connect();
+                
         Graphics g = null;
         
         // creamos la instancia de la ventana
@@ -47,7 +57,14 @@ public class Dark {
         
         //ventanaInicio.panel1.paintComponents();
         
+        //Cargamos la tabla de las acciones
+        con.mostrarAcciones();
+        
+        //Cerramos la conexión
+        con.close();
+        
     }
+    
     
     
     
