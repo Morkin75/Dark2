@@ -23,25 +23,43 @@ import java.util.logging.Logger;
  */
 public class Conector {
     
-    //File file = new File("../BBDD/BDDark.db");
+    File archivoRuta = new File(".");
+    //File archivoRuta = Dark.ventanaInicio.abre;
     
-    //String url = "/Volumes/SecundarioUSB/darkSceptre/BBDD/BDDark.db";
-    String url = "../Dark/BBDD/BDDark.db";
-    //String url = file.getPath();
-    //String url = "..\\SecundarioUSB\\darkSceptre\\BBDD\\BDDark.db";
+    //Cadena para almacenar la URL de la base de datos
+    String urlBBDD;
+    
+    //Objeto de conexión a la base de datos
     Connection connect;
 
+    //Este es el constructor
     public Conector() {
+      
     }
     
     public void connect(){
         
+        //System.out.println(archivoRuta.toString());
+        
+        System.out.println(System.getProperty("os.name"));
+        //Preguntamos por el Sistema Operativo para conocer la ruta del archivo
+        if(System.getProperty("os.name").compareTo("Mac OS X") == 0) {
+            urlBBDD = "../Dark/BBDD/BDDark.db"; //Para MAC
+            System.out.println("Pasa por MAC");
+        }
+        if(System.getProperty("os.name").compareTo("Windows") == 0) {
+            urlBBDD = "..\\DarkSceptreBeta\\BBDD\\BDDark.db"; //Para Windows
+            System.out.println("Pasa por Windows");
+        }
+        urlBBDD = archivoRuta.getPath(); //Desde Archivo
+        
+        
         //A ver la ruta:
-        //System.out.println(file.getAbsolutePath());
+        System.out.println(archivoRuta.getAbsolutePath());
         //System.out.println(file.getPath());
         
  try {
-     connect = DriverManager.getConnection("jdbc:sqlite:"+url);
+     connect = DriverManager.getConnection("jdbc:sqlite:"+urlBBDD);
      if (connect!=null) {
          System.out.println("Conectado");
      }

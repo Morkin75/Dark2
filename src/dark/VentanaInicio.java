@@ -10,6 +10,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
 import static javax.swing.SwingConstants.CENTER;
@@ -26,6 +28,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     //Array de casillas del mapa
     public JLabel[][] casillasMapa;
     public JSeparator separador3;
+    
+    public File abre;
     
     //Graphics cuadrado = null;
     BufferedImage cuadrado;
@@ -124,6 +128,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTextInfo = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -234,6 +242,22 @@ public class VentanaInicio extends javax.swing.JFrame {
         jScrollInfo.setViewportView(jTextInfo);
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Cargar (Load)");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Guardar (Save)");
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem3.setText("Salir (Exit)");
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -306,11 +330,29 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTextInfo.setText(" " + String.valueOf(acciones.getValueAt(jTable5.getSelectedRow(), 2)));
     }//GEN-LAST:event_jTable5MousePressed
 
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+        System.out.println("Quieres abrir el archivo");
+        /**llamamos el metodo que permite cargar la ventana*/
+        JFileChooser file=new JFileChooser();
+        file.showOpenDialog(this);
+        /**abrimos el archivo seleccionado*/
+        abre = file.getSelectedFile();
+        //A ver la ruta:
+        System.out.println(abre.getPath());
+        Dark.con.archivoRuta = abre;
+        Dark.con.connect();
+        Dark.con.mostrarAcciones();
+        Dark.con.close();
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
     public javax.swing.JMenuBar jMenuBar1;
+    public javax.swing.JMenuItem jMenuItem1;
+    public javax.swing.JMenuItem jMenuItem2;
+    public javax.swing.JMenuItem jMenuItem3;
     public javax.swing.JPanel jPanel1;
     public javax.swing.JScrollPane jScrollInfo;
     public javax.swing.JScrollPane jScrollJuego;
@@ -319,6 +361,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JScrollPane jScrollPane4;
     public javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JPopupMenu.Separator jSeparator1;
     public javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JTable jTable2;
     public javax.swing.JTable jTable3;

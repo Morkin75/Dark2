@@ -36,8 +36,8 @@ public class Dark {
         //Intentamos la conexion con la BBDD
         //Creamos el conector
         con = new Conector();
-        //Abrimos la conexión
-        con.connect();
+        //Abrimos la conexión automática. Comentar todas las llamadas de con cuando haya que cargar
+        //con.connect();
                 
         Graphics g = null;
         
@@ -58,10 +58,10 @@ public class Dark {
         //ventanaInicio.panel1.paintComponents();
         
         //Cargamos la tabla de las acciones
-        con.mostrarAcciones();
+        //con.mostrarAcciones();
         
         //Cerramos la conexión
-        con.close();
+        //con.close();
         
     }
     
