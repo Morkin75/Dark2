@@ -26,7 +26,7 @@ public class Conector {
     //File file = new File("../BBDD/BDDark.db");
     
     //String url = "/Volumes/SecundarioUSB/darkSceptre/BBDD/BDDark.db";
-    String url = "../BBDD/BDDark.db";
+    String url = "../Dark/BBDD/BDDark.db";
     //String url = file.getPath();
     //String url = "..\\SecundarioUSB\\darkSceptre\\BBDD\\BDDark.db";
     Connection connect;
