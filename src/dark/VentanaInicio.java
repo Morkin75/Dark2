@@ -84,6 +84,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         
         //Dark.con.mostrarAcciones();
         
+        //Aquí va el texto con la información de cada opción seleccionada
+        this.jTextInfo.setBackground(Color.CYAN);
+        this.jTextInfo.setText("Aquí va el texto con la información de cada opción seleccionada");
+        
     }
     
     @Override
@@ -116,6 +120,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        jScrollInfo = new javax.swing.JScrollPane();
+        jTextInfo = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -172,6 +178,11 @@ public class VentanaInicio extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jTabbedPane1.addTab("Personajes", jScrollPane2);
@@ -207,12 +218,20 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTabbedPane1.addTab("Objetos", jScrollPane4);
 
         jTable5.setModel(acciones);
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable5MousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable5);
 
         jTabbedPane1.addTab("Acciones", jScrollPane5);
 
         jScrollJuego.setViewportView(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
+
+        jTextInfo.setFocusable(false);
+        jScrollInfo.setViewportView(jTextInfo);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -236,7 +255,9 @@ public class VentanaInicio extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(378, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -253,7 +274,10 @@ public class VentanaInicio extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -273,12 +297,22 @@ public class VentanaInicio extends javax.swing.JFrame {
         casillasMapa[posMapaX][posMapaY].setBackground(Color.CYAN);
     }//GEN-LAST:event_jScrollMapaMousePressed
 
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        System.out.println(" " + jTable5.getSelectedRow());
+    }//GEN-LAST:event_jTable2MousePressed
+
+    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
+        System.out.println(" " + jTable5.getSelectedRow());
+        jTextInfo.setText(" " + String.valueOf(acciones.getValueAt(jTable5.getSelectedRow(), 2)));
+    }//GEN-LAST:event_jTable5MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
     public javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JPanel jPanel1;
+    public javax.swing.JScrollPane jScrollInfo;
     public javax.swing.JScrollPane jScrollJuego;
     public javax.swing.JScrollPane jScrollMapa;
     public javax.swing.JScrollPane jScrollPane2;
@@ -290,6 +324,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JTable jTable3;
     public javax.swing.JTable jTable4;
     public javax.swing.JTable jTable5;
+    public javax.swing.JTextPane jTextInfo;
     public javax.swing.JSeparator separador1;
     public javax.swing.JSeparator separador2;
     // End of variables declaration//GEN-END:variables

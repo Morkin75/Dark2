@@ -1,6 +1,8 @@
 package dark;
 
 import static dark.Dark.con;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,7 +22,12 @@ import java.util.logging.Logger;
  * @author manueljesusgarcialopez
  */
 public class Conector {
-    String url = "/Volumes/SecundarioUSB/darkSceptre/BBDD/BDDark.db";
+    
+    //File file = new File("../BBDD/BDDark.db");
+    
+    //String url = "/Volumes/SecundarioUSB/darkSceptre/BBDD/BDDark.db";
+    String url = "../BBDD/BDDark.db";
+    //String url = file.getPath();
     //String url = "..\\SecundarioUSB\\darkSceptre\\BBDD\\BDDark.db";
     Connection connect;
 
@@ -28,6 +35,11 @@ public class Conector {
     }
     
     public void connect(){
+        
+        //A ver la ruta:
+        //System.out.println(file.getAbsolutePath());
+        //System.out.println(file.getPath());
+        
  try {
      connect = DriverManager.getConnection("jdbc:sqlite:"+url);
      if (connect!=null) {
