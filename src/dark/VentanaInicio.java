@@ -5,6 +5,7 @@
  */
 package dark;
 
+import static dark.Dark.ventanaInicio;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -31,11 +32,17 @@ public class VentanaInicio extends javax.swing.JFrame {
     
     public File abre;
     
+    //Creamos un objeto del panel de Ordenes
+    Ordenes ordenes;
+    
     //Graphics cuadrado = null;
     BufferedImage cuadrado;
     
     //El modelo de la tabla de Acciones
     DefaultTableModel acciones = new DefaultTableModel();
+    
+    //El modelo de la tabla de los Personajes
+    DefaultTableModel personajes = new DefaultTableModel();
     
     int posMapaX, posMapaY;
     /**
@@ -43,6 +50,17 @@ public class VentanaInicio extends javax.swing.JFrame {
      */
     public VentanaInicio() {
         initComponents();
+        
+        
+        //Creamos un objeto del panel de Ordenes
+        ordenes = new Ordenes();
+        
+        this.add(ordenes);
+        //ordenes.cargarMenu();
+        ordenes.setBounds(602, 392, 400, 234);
+        ordenes.setVisible(true);
+        
+        
         
         //Casilla seleccionada del mapa
         posMapaX = 0;
@@ -86,18 +104,40 @@ public class VentanaInicio extends javax.swing.JFrame {
         acciones.addColumn("Acción");
         acciones.addColumn("Descripción");
         
+        //Preparamos el modelo de la tabla de Personajes
+        personajes.addColumn("ID");
+        personajes.addColumn("Nombre");
+        personajes.addColumn("Fuerza");
+        personajes.addColumn("Velocidad");
+        personajes.addColumn("Energía");
+        personajes.addColumn("Agilidad");
+        personajes.addColumn("Magia");
+        personajes.addColumn("Vida");
+        personajes.addColumn("Rango");
+        personajes.addColumn("Oro");
+        
         //Dark.con.mostrarAcciones();
+        
         
         //Aquí va el texto con la información de cada opción seleccionada
         this.jTextInfo.setBackground(Color.CYAN);
-        this.jTextInfo.setText("Aquí va el texto con la información de cada opción seleccionada");
+        //this.jTextInfo.setText("Aquí va el texto con la información de cada opción seleccionada");
         
-    }
-    
-    @Override
-    public void paint(Graphics g) {
         
-        super.paint(g);
+        //Este panel se muestra cuando estamos en las pestañas de acciones o...
+        this.jScrollInfo.setVisible(true);
+        
+        
+        
+        //this.jLayeredPane1.setComponentZOrder(ordenes, 1);
+        //ventanaInicio.add(ordenes);
+        //this.jLayeredPane1.add(ordenes);
+        //this.add(Dark.ordenes);
+        //Dark.ordenes.setSize(200, 200);
+        //ordenes.setBounds(602, 392, 400, 234);
+        //ordenes.setVisible(true);
+        //System.out.println("L:" + jScrollInfo.getBounds().toString());
+        //ordenes.cargarMenu();
         
     }
 
@@ -165,30 +205,24 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         jScrollJuego.setName("jScrollJuego"); // NOI18N
 
-        jTabbedPane1.setName(""); // NOI18N
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Nombre", "Fuerza", "Velocidad", "Energia", "Agilidad", "Vida", "Oro"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setName("Componentes");
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(475, 200));
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
             }
         });
+
+        jTable2.setAutoCreateRowSorter(true);
+        jTable2.setModel(personajes);
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable2MousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -238,6 +272,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         jScrollJuego.setViewportView(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
 
+        jTextInfo.setEditable(false);
         jTextInfo.setFocusable(false);
         jScrollInfo.setViewportView(jTextInfo);
 
@@ -278,11 +313,11 @@ public class VentanaInicio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(378, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(429, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,11 +332,9 @@ public class VentanaInicio extends javax.swing.JFrame {
                         .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -322,7 +355,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jScrollMapaMousePressed
 
     private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        System.out.println(" " + jTable5.getSelectedRow());
+        System.out.println(" " + jTable2.getSelectedRow());
     }//GEN-LAST:event_jTable2MousePressed
 
     private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
@@ -339,11 +372,44 @@ public class VentanaInicio extends javax.swing.JFrame {
         abre = file.getSelectedFile();
         //A ver la ruta:
         System.out.println(abre.getPath());
-        Dark.con.archivoRuta = abre;
-        Dark.con.connect();
-        Dark.con.mostrarAcciones();
-        Dark.con.close();
+        //Comentar esto cuando queramos abrir la BBDD directamente:
+        //Dark.con.archivoRuta = abre;
+        //Dark.con.connect();
+        //Dark.con.mostrarAcciones();
+        //Dark.con.close();
+        //Hasta aquí
     }//GEN-LAST:event_jMenuItem1MousePressed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        System.out.println("S:" + jTabbedPane1.getSelectedIndex());
+        try {
+            if(jTabbedPane1.getSelectedIndex() == 0) { //Pestaña 1
+                this.jScrollInfo.setVisible(false);   
+                ordenes.setVisible(true);
+                System.out.println("Pasa por pestaña 0");
+            }  else if (jTabbedPane1.getSelectedIndex() == 3) { //Pestaña 4
+                this.jScrollInfo.setVisible(true);
+                ordenes.setVisible(false);
+                System.out.println("Pasa por pestaña 3");                
+                //Dark.ordenes.setEnabled(false);
+            } else {
+                this.jScrollInfo.setVisible(false);
+                ordenes.setVisible(false);
+                System.out.println("NO Pasa por aqui");              
+            }
+            //System.out.println("Componentes: "+jTable5.getValueAt(1, 2));
+        } catch (NullPointerException ex) { //Excepcion porque al ser un evento, Java piensa que el objeto puede ser nulo
+            System.out.println("dark.VentanaInicio.jTabbedPane1StateChanged()");
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        //Vamos a ver qué PJ hemos seleccionado
+        int PJ = jTable2.getSelectedRow();
+        System.out.println("PJ: " + PJ);
+        //Indicamos el PJ al cual le vamos a dar las órdenes
+        ventanaInicio.ordenes.jLabel4.setText(jTable2.getValueAt(PJ, 1).toString());
+    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

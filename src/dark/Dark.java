@@ -18,14 +18,16 @@ import java.sql.SQLException;
 public class Dark {
 
     //Ventana de inicio
-    static VentanaInicio ventanaInicio;
+    static VentanaInicio ventanaInicio = new VentanaInicio();
+    
+    //Objeto de conexion
+    static Conector con = new Conector();
+        //Intentamos la conexion con la BBDD
+        //Creamos el conector
+        //con = new Conector();
     
     //Mapa de inicio
     public int[][] mapa = new int[32][16];
-    
-    //Objeto de conexion
-    public static Conector con;
-    
     
     /**
      * @param args the command line arguments
@@ -33,16 +35,9 @@ public class Dark {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        //Intentamos la conexion con la BBDD
-        //Creamos el conector
-        con = new Conector();
-        //Abrimos la conexión automática. Comentar todas las llamadas de con cuando haya que cargar
-        //con.connect();
-                
-        Graphics g = null;
         
         // creamos la instancia de la ventana
-        ventanaInicio = new VentanaInicio();
+        //ventanaInicio = new VentanaInicio();
         
         //Inicializamos y mostramos la ventana
         ventanaInicio.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -53,19 +48,29 @@ public class Dark {
         ventanaInicio.jScrollMapa.setBackground(Color.red);
         //ventanaInicio.jPanel1.setPreferredSize(new Dimension(400, 200));
         
-        //ventanaInicio.dibujaLinea(g);
+        //Este panel se muestra cuando estamos en las pestañas de acciones o...
+        //Desde la clase lo mostramos y aquí lo escondemos para mostrarlo cuando se pulse la pestaa adecuada
+        ventanaInicio.jScrollInfo.setVisible(false);
         
-        //ventanaInicio.panel1.paintComponents();
         
-        //Cargamos la tabla de las acciones
-        //con.mostrarAcciones();
+        
+        
+        //Abrimos la conexión automática. Comentar todas las llamadas de con cuando haya que cargar con el JFileChoose
+        con.connect();
+        
+        //Cargamos la tabla de las acciones. Comentamos esto cuando queramos usar el JFileChoose
+        con.mostrarAcciones();
+        
+        //Cargamos las acciones de los menus
+        ventanaInicio.ordenes.cargarMenu();
+        
+        //Cargamos la tabla de los personajes
+        con.mostrarPersonajes();
         
         //Cerramos la conexión
-        //con.close();
+        con.close();
         
     }
-    
-    
     
     
 }

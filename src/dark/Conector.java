@@ -1,6 +1,7 @@
 package dark;
 
 import static dark.Dark.con;
+import static dark.Dark.ventanaInicio;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -51,7 +52,8 @@ public class Conector {
             urlBBDD = "..\\DarkSceptreBeta\\BBDD\\BDDark.db"; //Para Windows
             System.out.println("Pasa por Windows");
         }
-        urlBBDD = archivoRuta.getPath(); //Desde Archivo
+        //Comentar esto cuando no haya que usar el JFileChooser
+        //urlBBDD = archivoRuta.getPath(); //Desde Archivo
         
         
         //A ver la ruta:
@@ -91,20 +93,37 @@ public class Conector {
                 fila[i] = result.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
 
             // Se añade al modelo la fila completa.
-            Dark.ventanaInicio.acciones.addRow(fila);
+            ventanaInicio.acciones.addRow(fila);
+            
             //modelo.addRow(fila); 
+            
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        
+    }
+    public void mostrarPersonajes(){
+        ResultSet result = null;
+        try {
+            PreparedStatement st;
+            st = con.connect.prepareStatement("Select * FROM Personajes");
+            result = st.executeQuery();
+            while (result.next()) {
                 
-                
-                //System.out.print("ID: ");
-                //System.out.println(result.getInt("ID"));
- 
-                //System.out.print("Accion: ");
-                //System.out.println(result.getString("Accion"));
- 
-                //System.out.print("Descripción: ");
-                //System.out.println(result.getString("Descripcion"));
- 
-                //System.out.println("=======================");
+            // Se crea un array que será una de las filas de la tabla. 
+            Object [] fila = new Object[10]; // Hay tres columnas en la tabla
+
+            // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
+            for (int i=0;i<10;i++)
+                fila[i] = result.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+
+            // Se añade al modelo la fila completa.
+            
+            Dark.ventanaInicio.personajes.addRow(fila);
+            //modelo.addRow(fila); 
+            
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
