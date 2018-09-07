@@ -11,12 +11,18 @@ import java.awt.Graphics;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 /**
  *
  * @author manueljesusgarcialopez
  */
 public class Dark {
 
+    public static Icon imageCalle;
+    public static JLabel calle = new JLabel(imageCalle);
+    
     //Ventana de inicio
     static VentanaInicio ventanaInicio = new VentanaInicio();
     
@@ -36,8 +42,15 @@ public class Dark {
         // TODO code application logic here
         
         
-        // creamos la instancia de la ventana
-        //ventanaInicio = new VentanaInicio();
+        //Indicamos la imagen del label
+        imageCalle = new ImageIcon("../Dark/Imagenes/CalleUD.png");
+        
+        //Ponemos la imagen en nuestro label
+        calle.setIcon(imageCalle);
+        //Podemos el label en una casilla en el mapa
+        ventanaInicio.casillasMapa[5][6].setBackground(Color.black);
+        ventanaInicio.casillasMapa[5][6].setText("");
+        ventanaInicio.casillasMapa[5][6].setIcon(imageCalle);
         
         //Inicializamos y mostramos la ventana
         ventanaInicio.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -54,7 +67,7 @@ public class Dark {
         
         
         
-        
+        /* De aquí para abajo, comentado si usamos JFileChooser*/
         //Abrimos la conexión automática. Comentar todas las llamadas de con cuando haya que cargar con el JFileChoose
         con.connect();
         
@@ -71,6 +84,7 @@ public class Dark {
         con.close();
         
     }
+    
     
     
 }

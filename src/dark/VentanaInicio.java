@@ -30,6 +30,10 @@ public class VentanaInicio extends javax.swing.JFrame {
     public JLabel[][] casillasMapa;
     public JSeparator separador3;
     
+    //Creamos un array para almacenar las ordenes de los personajes
+    public EnviarOrdenes[] ordenesPJ;
+    
+    //Objeto para saber la ruta del archivo de la BBDD
     public File abre;
     
     //Creamos un objeto del panel de Ordenes
@@ -44,6 +48,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     //El modelo de la tabla de los Personajes
     DefaultTableModel personajes = new DefaultTableModel();
     
+    //Coordenadas donde hemos pulsado para ver la casilla del mapa
     int posMapaX, posMapaY;
     /**
      * Creates new form VentanaInicio
@@ -51,28 +56,22 @@ public class VentanaInicio extends javax.swing.JFrame {
     public VentanaInicio() {
         initComponents();
         
-        
         //Creamos un objeto del panel de Ordenes
         ordenes = new Ordenes();
-        
+        //Añadimos el objeto a este formulario
         this.add(ordenes);
-        //ordenes.cargarMenu();
+        //Establecemos el tamaño y posición del objeto, y lo hacemos visible
         ordenes.setBounds(602, 392, 400, 234);
-        ordenes.setVisible(true);
-        
-        
+        ordenes.setVisible(true);        
         
         //Casilla seleccionada del mapa
         posMapaX = 0;
         posMapaY = 0;
         
-        //getGraphics().drawLine(10, 10, 200, 200);
-        //repaint();
-        
-        //Inicializamos el separador
+        //Inicializamos el separador. MEJORAR
         separador3 = new JSeparator();
         
-        cuadrado = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
+        //cuadrado = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
         
         //Creamos el mapa
         casillasMapa = new JLabel[32][16];
@@ -86,18 +85,9 @@ public class VentanaInicio extends javax.swing.JFrame {
         separador2.setOpaque(true);
         separador2.setBackground(Color.BLUE);
         separador2.setOrientation(SwingConstants.VERTICAL);
-        //System.out.println(separador2.getLocation().x);
-        //System.out.println(separador2.getLocation().y);
-        //System.out.println(separador2.getSize().toString());
         
         separador2.setSize(12, 255);
         separador2.setLocation(606, 400);
-        //separador3.setSize(1, 255);
-        
-        System.out.println(separador2.getLocation().x);
-        System.out.println(separador2.getLocation().y);
-        System.out.println(separador2.getSize().toString());
-        //jTabbedPane1.add("Hola", jScrollMapa);
         
         //Preparamos el modelo de la tabla de Acciones
         acciones.addColumn("Número");
@@ -116,28 +106,16 @@ public class VentanaInicio extends javax.swing.JFrame {
         personajes.addColumn("Rango");
         personajes.addColumn("Oro");
         
-        //Dark.con.mostrarAcciones();
-        
-        
-        //Aquí va el texto con la información de cada opción seleccionada
+        //Aquí va el texto con la información de cada opción seleccionada del cuadro de las Acciones
         this.jTextInfo.setBackground(Color.CYAN);
-        //this.jTextInfo.setText("Aquí va el texto con la información de cada opción seleccionada");
-        
         
         //Este panel se muestra cuando estamos en las pestañas de acciones o...
         this.jScrollInfo.setVisible(true);
         
+        //Creamos el array de objetos con las acciones
+        ordenesPJ = new EnviarOrdenes[30];
         
-        
-        //this.jLayeredPane1.setComponentZOrder(ordenes, 1);
-        //ventanaInicio.add(ordenes);
-        //this.jLayeredPane1.add(ordenes);
-        //this.add(Dark.ordenes);
-        //Dark.ordenes.setSize(200, 200);
-        //ordenes.setBounds(602, 392, 400, 234);
-        //ordenes.setVisible(true);
-        //System.out.println("L:" + jScrollInfo.getBounds().toString());
-        //ordenes.cargarMenu();
+        //inicializamos el array de las órdenes a enviar
         
     }
 
@@ -166,6 +144,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTable5 = new javax.swing.JTable();
         jScrollInfo = new javax.swing.JScrollPane();
         jTextInfo = new javax.swing.JTextPane();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -218,8 +198,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTable2.setModel(personajes);
         jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable2MousePressed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable2MouseReleased(evt);
             }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
@@ -276,6 +256,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         jTextInfo.setFocusable(false);
         jScrollInfo.setViewportView(jTextInfo);
 
+        jToggleButton1.setText("Ver Objetos");
+
+        jToggleButton2.setText("Ver Enemigos");
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("Cargar (Load)");
@@ -309,7 +293,11 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,13 +305,18 @@ public class VentanaInicio extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(429, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton2)))
                 .addGap(31, 31, 31)
                 .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -340,23 +333,20 @@ public class VentanaInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Evento que se dispara cuando seleccionamos las casillas del mapa
     private void jScrollMapaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollMapaMousePressed
         System.out.println("Pulsado:" + jPanel1.getMousePosition().toString() + " - " 
                 + jPanel1.getMousePosition().x + ":" + jPanel1.getMousePosition().y);
+        //Obtenemos la casilla del mapa pulsada
         posMapaX = jPanel1.getMousePosition().x/33;
         posMapaY = jPanel1.getMousePosition().y/33;
         System.out.println("Casilla: "+ posMapaX + "," + posMapaY);
-                //.getMousePosition().toString());
                 
         System.out.println("Label 0,0 está en: " + casillasMapa[0][0].getLocation().toString());
         //Cambiamos de color la casilla marcada
         limpiarMapa();
         casillasMapa[posMapaX][posMapaY].setBackground(Color.CYAN);
     }//GEN-LAST:event_jScrollMapaMousePressed
-
-    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        System.out.println(" " + jTable2.getSelectedRow());
-    }//GEN-LAST:event_jTable2MousePressed
 
     private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
         System.out.println(" " + jTable5.getSelectedRow());
@@ -376,6 +366,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         //Dark.con.archivoRuta = abre;
         //Dark.con.connect();
         //Dark.con.mostrarAcciones();
+        //ventanaInicio.ordenes.cargarMenu();
+        //Dark.con.mostrarPersonajes();
         //Dark.con.close();
         //Hasta aquí
     }//GEN-LAST:event_jMenuItem1MousePressed
@@ -409,7 +401,39 @@ public class VentanaInicio extends javax.swing.JFrame {
         System.out.println("PJ: " + PJ);
         //Indicamos el PJ al cual le vamos a dar las órdenes
         ventanaInicio.ordenes.jLabel4.setText(jTable2.getValueAt(PJ, 1).toString());
+        ventanaInicio.ordenes.jLabel5.setText(jTable2.getValueAt(PJ, 1).toString());
+        ventanaInicio.ordenes.jLabel6.setText(jTable2.getValueAt(PJ, 1).toString());
+        ventanaInicio.ordenes.jLabel7.setText(jTable2.getValueAt(PJ, 1).toString());
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseReleased
+        //Vamos a ver qué PJ hemos seleccionado
+        int PJ = jTable2.getSelectedRow();
+        System.out.println("PJ: " + PJ);
+        //Indicamos el PJ al cual le vamos a dar las órdenes en cada una de las pestañas
+        ventanaInicio.ordenes.jLabel4.setText(jTable2.getValueAt(PJ, 1).toString());
+        ventanaInicio.ordenes.jLabel5.setText(jTable2.getValueAt(PJ, 1).toString());
+        ventanaInicio.ordenes.jLabel6.setText(jTable2.getValueAt(PJ, 1).toString());
+        ventanaInicio.ordenes.jLabel7.setText(jTable2.getValueAt(PJ, 1).toString());
+        //Si seleccionamos un Thrall, anulamos las acciones dos y tres
+        int filaSeleccionada = jTable2.getSelectedRow();
+        String textoSeleccionado = (String) jTable2.getValueAt(filaSeleccionada, 8);
+        if(textoSeleccionado.equals("Thrall")) { //Desactivamos y cambiamos de color
+            ventanaInicio.ordenes.jTabbedPane1.setEnabledAt(1, false);
+            ventanaInicio.ordenes.jTabbedPane1.setBackgroundAt(1, Color.darkGray);
+            ventanaInicio.ordenes.jTabbedPane1.setEnabledAt(2, false);
+            ventanaInicio.ordenes.jTabbedPane1.setBackgroundAt(2, Color.darkGray);
+            ventanaInicio.ordenes.jTabbedPane1.setSelectedIndex(0); //Vamos a la primera pestaña
+        } else {
+            ventanaInicio.ordenes.jTabbedPane1.setEnabledAt(1, true);
+            ventanaInicio.ordenes.jTabbedPane1.setBackgroundAt(1, Color.white);
+            ventanaInicio.ordenes.jTabbedPane1.setEnabledAt(2, true);
+            ventanaInicio.ordenes.jTabbedPane1.setBackgroundAt(2, Color.white);
+        }
+        
+        //Cada vez que seleccionamos un personaje, tenemos que ver si tiene las órdenes
+        
+    }//GEN-LAST:event_jTable2MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -434,6 +458,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JTable jTable4;
     public javax.swing.JTable jTable5;
     public javax.swing.JTextPane jTextInfo;
+    public javax.swing.JToggleButton jToggleButton1;
+    public javax.swing.JToggleButton jToggleButton2;
     public javax.swing.JSeparator separador1;
     public javax.swing.JSeparator separador2;
     // End of variables declaration//GEN-END:variables
