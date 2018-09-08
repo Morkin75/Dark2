@@ -66,9 +66,12 @@ public class Ordenes extends javax.swing.JPanel {
 
         jLabel1.setText("Acción:");
 
+        jComboBox1.setEnabled(false);
+
         jLabel5.setText("          ");
 
         jButtonOrdenar1.setText("Ordenar");
+        jButtonOrdenar1.setEnabled(false);
         jButtonOrdenar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOrdenar1ActionPerformed(evt);
@@ -76,6 +79,7 @@ public class Ordenes extends javax.swing.JPanel {
         });
 
         jButtonCancelar1.setText("Cancelar");
+        jButtonCancelar1.setEnabled(false);
         jButtonCancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelar1ActionPerformed(evt);
@@ -279,23 +283,29 @@ public class Ordenes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonOrdenar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenar1MouseClicked
-        //desactivamos la acción, se queda como marcada...
-        jComboBox1.setEnabled(false);
+        
     }//GEN-LAST:event_jButtonOrdenar1MouseClicked
 
     private void jButtonOrdenar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar2ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox2.setEnabled(false);
+        jButtonOrdenar2.setEnabled(false);
+        jButtonCancelar2.setEnabled(true);
     }//GEN-LAST:event_jButtonOrdenar2ActionPerformed
 
     private void jButtonOrdenar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar3ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox3.setEnabled(false);
+        jButtonOrdenar3.setEnabled(false);
+        jButtonCancelar3.setEnabled(true);
     }//GEN-LAST:event_jButtonOrdenar3ActionPerformed
 
     private void jButtonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar1ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox1.setEnabled(true);
+        //Ponemos los botones en orden
+        jButtonOrdenar1.setEnabled(true);
+        jButtonCancelar1.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
@@ -311,6 +321,25 @@ public class Ordenes extends javax.swing.JPanel {
     private void jButtonOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar1ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox1.setEnabled(false);
+        //Guardamos la acción seleccionada en el combobox
+        int idAccion = Dark.ventanaInicio.ordenes.jComboBox1.getSelectedIndex();
+        //Guardamos la acción en el ArrayList de las acciones
+        int posicion = Dark.ventanaInicio.PJ;
+        System.out.println("Posicion para List: " + posicion);
+        //Guardamos la orden
+        EnviarOrdenes orden1; //Creamos una instancia
+        //Recuperamos los valores de las ordenes de ese PJ
+        orden1 = Dark.ventanaInicio.ordenesPJ.get(posicion);
+        //Asignamos el nuevo valor de la accion selecciona en el objeto
+        orden1.accion1 = idAccion;
+        System.out.println("Orden para List: " + orden1.accion1);
+        //Almacenamos el objeto en el ArrayList
+        Dark.ventanaInicio.ordenesPJ.set(posicion, orden1);
+        //Ponemos los botones en orden
+        jButtonOrdenar1.setEnabled(false);
+        jButtonCancelar1.setEnabled(true);
+        
+                //Dark.ventanaInicio.ordenes.jComboBox1.setEnabled(true);
     }//GEN-LAST:event_jButtonOrdenar1ActionPerformed
 
 

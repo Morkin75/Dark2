@@ -113,14 +113,23 @@ public class Conector {
             while (result.next()) {
                 
             // Se crea un array que será una de las filas de la tabla. 
-            Object [] fila = new Object[10]; // Hay tres columnas en la tabla
+            Object [] fila = new Object[10]; // Hay 10 columnas en la tabla
 
             // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
-            for (int i=0;i<10;i++)
-                fila[i] = result.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
-
-            // Se añade al modelo la fila completa.
+            //for (int i=0;i<10;i++)
+                //fila[i] = result.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+            fila[0] = result.getObject("Nombre");
+            fila[1] = result.getObject("PosX") + "-" + result.getObject("PosY");
+            fila[2] = result.getObject("Rango");
+            fila[3] = result.getObject("Fuerza");
+            fila[4] = result.getObject("Velocidad");
+            fila[5] = result.getObject("Energía");
+            fila[6] = result.getObject("Agilidad");
+            fila[7] = result.getObject("Magia");
+            fila[8] = result.getObject("Vida");
+            fila[9] = result.getObject("Oro");
             
+            // Se añade al modelo la fila completa.
             Dark.ventanaInicio.personajes.addRow(fila);
             //modelo.addRow(fila); 
             

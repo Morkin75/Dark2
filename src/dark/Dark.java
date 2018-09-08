@@ -20,6 +20,8 @@ import javax.swing.JLabel;
  */
 public class Dark {
 
+    
+    
     public static Icon imageCalle;
     public static JLabel calle = new JLabel(imageCalle);
     
@@ -54,7 +56,7 @@ public class Dark {
         
         //Inicializamos y mostramos la ventana
         ventanaInicio.getContentPane().setBackground(Color.LIGHT_GRAY);
-        ventanaInicio.setSize(1024, 724);
+        //ventanaInicio.setSize(1024, 724);
         ventanaInicio.setResizable(false);
         ventanaInicio.setVisible(true);
         
@@ -63,7 +65,7 @@ public class Dark {
         
         //Este panel se muestra cuando estamos en las pestañas de acciones o...
         //Desde la clase lo mostramos y aquí lo escondemos para mostrarlo cuando se pulse la pestaa adecuada
-        ventanaInicio.jScrollInfo.setVisible(false);
+        
         
         
         
@@ -79,6 +81,9 @@ public class Dark {
         
         //Cargamos la tabla de los personajes
         con.mostrarPersonajes();
+        
+        //Vamos a pintar las casillas con PJs
+        ventanaInicio.seleccionarCasillasConPJs();
         
         //Cerramos la conexión
         con.close();
