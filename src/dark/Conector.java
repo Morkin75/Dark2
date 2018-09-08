@@ -52,6 +52,10 @@ public class Conector {
             urlBBDD = "..\\DarkSceptreBeta\\BBDD\\BDDark.db"; //Para Windows
             System.out.println("Pasa por Windows");
         }
+        if(System.getProperty("os.name").compareTo("Linux") == 0) {
+            urlBBDD = "../Dark2/BBDD/BDDark.db"; //Para MAC
+            System.out.println("Pasa por Linux");
+        }
         //Comentar esto cuando no haya que usar el JFileChooser
         //urlBBDD = archivoRuta.getPath(); //Desde Archivo
         
