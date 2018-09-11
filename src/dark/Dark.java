@@ -14,13 +14,16 @@ import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 /**
  *
  * @author manueljesusgarcialopez
  */
 public class Dark {
 
-    
+    //URL para indicar Ruta
+    static java.net.URL url;
+    static String rutaImagenes;
     
     public static Icon imageCalle;
     public static JLabel calle = new JLabel(imageCalle);
@@ -45,14 +48,24 @@ public class Dark {
         
         
         //Indicamos la imagen del label
-        imageCalle = new ImageIcon("../Dark/Imagenes/CalleUD.png");
+        //imageCalle = new ImageIcon("../Dark/Imagenes/CalleUD.png");
         
         //Ponemos la imagen en nuestro label
-        calle.setIcon(imageCalle);
+        //calle.setIcon(imageCalle);
         //Podemos el label en una casilla en el mapa
-        ventanaInicio.casillasMapa[5][6].setBackground(Color.black);
-        ventanaInicio.casillasMapa[5][6].setText("");
-        ventanaInicio.casillasMapa[5][6].setIcon(imageCalle);
+        //Indicamos el archivo del PJ
+        
+        //Indicamos la ruta de la imagen a poner
+        rutaImagenes = "/images/CalleUD.png";   
+        url = ventanaInicio.getClass().getResource(rutaImagenes);
+        
+        //Cargamos el gráfico
+        ImageIcon icon = new ImageIcon(url);
+        //ventanaInicio.casillasMapa[5][6].setBackground(Color.black);
+        ventanaInicio.mapaFondo.casillasMapa[5][6].setHorizontalAlignment(JLabel.CENTER);
+        ventanaInicio.mapaFondo.casillasMapa[5][6].setText("");//Para alinear el gráfico no puede haber texto en el label
+        
+        ventanaInicio.mapaFondo.casillasMapa[5][6].setIcon(icon);
         
         //Inicializamos y mostramos la ventana
         ventanaInicio.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -71,22 +84,31 @@ public class Dark {
         
         /* De aquí para abajo, comentado si usamos JFileChooser*/
         //Abrimos la conexión automática. Comentar todas las llamadas de con cuando haya que cargar con el JFileChoose
-        con.connect();
+        con.connect(); //ESTA
         
         //Cargamos la tabla de las acciones. Comentamos esto cuando queramos usar el JFileChoose
-        con.mostrarAcciones();
+        con.mostrarAcciones(); //ESTA
         
         //Cargamos las acciones de los menus
-        ventanaInicio.ordenes.cargarMenu();
+        ventanaInicio.ordenes.cargarMenu(); //ESTA
+        //Si la acción es la de mover...
+        ventanaInicio.ordenes.cargarMenuEscogerLugar(); //ESTA
+        ventanaInicio.ordenes.jComboBox1_1.setVisible(false); //ESTA
         
         //Cargamos la tabla de los personajes
-        con.mostrarPersonajes();
+        con.mostrarPersonajes();  //ESTA
+        
+        //Cargamos la tabla de los objetos
+        con.mostrarObjetos();  //ESTA
         
         //Vamos a pintar las casillas con PJs
-        ventanaInicio.seleccionarCasillasConPJs();
+        ventanaInicio.mostrarPJs();  //ESTA
+        ventanaInicio.mostrarObjetos();  //ESTA
+        
+        
         
         //Cerramos la conexión
-        con.close();
+        con.close();  //ESTA
         
     }
     

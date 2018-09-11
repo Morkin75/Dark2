@@ -6,8 +6,7 @@
 package dark;
 
 import static dark.Dark.ventanaInicio;
-import javax.swing.ComboBoxModel;
-import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -15,11 +14,15 @@ import javax.swing.JScrollPane;
  */
 public class Ordenes extends javax.swing.JPanel {
 
+    
+    
     /**
      * Creates new form Ordenes
      */
     public Ordenes() {
         initComponents();
+        
+        
         
     }
 
@@ -39,6 +42,7 @@ public class Ordenes extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButtonOrdenar1 = new javax.swing.JButton();
         jButtonCancelar1 = new javax.swing.JButton();
+        jComboBox1_1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -67,6 +71,11 @@ public class Ordenes extends javax.swing.JPanel {
         jLabel1.setText("Acción:");
 
         jComboBox1.setEnabled(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("          ");
 
@@ -86,6 +95,10 @@ public class Ordenes extends javax.swing.JPanel {
             }
         });
 
+        jComboBox1_1.setEnabled(false);
+        jComboBox1_1.setMinimumSize(new java.awt.Dimension(100, 27));
+        jComboBox1_1.setSize(new java.awt.Dimension(200, 0));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -93,16 +106,20 @@ public class Ordenes extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, 284, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonOrdenar1)))
+                        .addComponent(jButtonOrdenar1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, 0, 284, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jComboBox1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -112,7 +129,9 @@ public class Ordenes extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -126,14 +145,12 @@ public class Ordenes extends javax.swing.JPanel {
 
         jLabel2.setText("Acción:");
 
+        jComboBox2.setEnabled(false);
+
         jLabel6.setText("          ");
 
         jButtonOrdenar2.setText("Ordenar");
-        jButtonOrdenar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonOrdenar1MouseClicked(evt);
-            }
-        });
+        jButtonOrdenar2.setEnabled(false);
         jButtonOrdenar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOrdenar2ActionPerformed(evt);
@@ -141,6 +158,7 @@ public class Ordenes extends javax.swing.JPanel {
         });
 
         jButtonCancelar2.setText("Cancelar");
+        jButtonCancelar2.setEnabled(false);
         jButtonCancelar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelar2ActionPerformed(evt);
@@ -188,14 +206,12 @@ public class Ordenes extends javax.swing.JPanel {
 
         jLabel3.setText("Acción:");
 
+        jComboBox3.setEnabled(false);
+
         jLabel7.setText("          ");
 
         jButtonOrdenar3.setText("Ordenar");
-        jButtonOrdenar3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonOrdenar1MouseClicked(evt);
-            }
-        });
+        jButtonOrdenar3.setEnabled(false);
         jButtonOrdenar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOrdenar3ActionPerformed(evt);
@@ -203,6 +219,7 @@ public class Ordenes extends javax.swing.JPanel {
         });
 
         jButtonCancelar3.setText("Cancelar");
+        jButtonCancelar3.setEnabled(false);
         jButtonCancelar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelar3ActionPerformed(evt);
@@ -281,14 +298,26 @@ public class Ordenes extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonOrdenar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOrdenar1MouseClicked
         
-    }//GEN-LAST:event_jButtonOrdenar1MouseClicked
-
+      
     private void jButtonOrdenar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar2ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox2.setEnabled(false);
+        //Guardamos la acción seleccionada en el combobox
+        int idAccion = Dark.ventanaInicio.ordenes.jComboBox2.getSelectedIndex();
+        //Guardamos la acción en el ArrayList de las acciones
+        int posicion = Dark.ventanaInicio.PJ;
+        System.out.println("Posicion para List: " + posicion);
+        //Guardamos la orden
+        EnviarOrdenes orden2; //Creamos una instancia
+        //Recuperamos los valores de las ordenes de ese PJ
+        orden2 = Dark.ventanaInicio.ordenesPJ.get(posicion);
+        //Asignamos el nuevo valor de la accion selecciona en el objeto
+        orden2.accion2 = idAccion;
+        System.out.println("Orden para List: " + orden2.accion2);
+        //Almacenamos el objeto en el ArrayList
+        Dark.ventanaInicio.ordenesPJ.set(posicion, orden2);
+        //Ponemos los botones en orden
         jButtonOrdenar2.setEnabled(false);
         jButtonCancelar2.setEnabled(true);
     }//GEN-LAST:event_jButtonOrdenar2ActionPerformed
@@ -296,6 +325,21 @@ public class Ordenes extends javax.swing.JPanel {
     private void jButtonOrdenar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar3ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox3.setEnabled(false);
+        //Guardamos la acción seleccionada en el combobox
+        int idAccion = Dark.ventanaInicio.ordenes.jComboBox3.getSelectedIndex();
+        //Guardamos la acción en el ArrayList de las acciones
+        int posicion = Dark.ventanaInicio.PJ;
+        System.out.println("Posicion para List: " + posicion);
+        //Guardamos la orden
+        EnviarOrdenes orden3; //Creamos una instancia
+        //Recuperamos los valores de las ordenes de ese PJ
+        orden3 = Dark.ventanaInicio.ordenesPJ.get(posicion);
+        //Asignamos el nuevo valor de la accion selecciona en el objeto
+        orden3.accion3 = idAccion;
+        System.out.println("Orden para List: " + orden3.accion3);
+        //Almacenamos el objeto en el ArrayList
+        Dark.ventanaInicio.ordenesPJ.set(posicion, orden3);
+        //Ponemos los botones en orden
         jButtonOrdenar3.setEnabled(false);
         jButtonCancelar3.setEnabled(true);
     }//GEN-LAST:event_jButtonOrdenar3ActionPerformed
@@ -311,11 +355,17 @@ public class Ordenes extends javax.swing.JPanel {
     private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox2.setEnabled(true);
+        //Ponemos los botones en orden
+        jButtonOrdenar2.setEnabled(true);
+        jButtonCancelar2.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelar2ActionPerformed
 
     private void jButtonCancelar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar3ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox3.setEnabled(true);
+        //Ponemos los botones en orden
+        jButtonOrdenar3.setEnabled(true);
+        jButtonCancelar3.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelar3ActionPerformed
 
     private void jButtonOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar1ActionPerformed
@@ -338,9 +388,20 @@ public class Ordenes extends javax.swing.JPanel {
         //Ponemos los botones en orden
         jButtonOrdenar1.setEnabled(false);
         jButtonCancelar1.setEnabled(true);
-        
-                //Dark.ventanaInicio.ordenes.jComboBox1.setEnabled(true);
     }//GEN-LAST:event_jButtonOrdenar1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        //Preguntamos por la acción seleccionada para actuar en consecuencia
+        if(jComboBox1.getSelectedIndex() == 0) {
+            ventanaInicio.ordenes.jComboBox1_1.setVisible(true);
+            ventanaInicio.ordenes.jComboBox1_1.setEnabled(true);
+            cargarMenuEscogerLugar();
+        } else {
+            //ventanaInicio.ordenes.jComboBox1_1.setVisible(false);
+            //ventanaInicio.ordenes.jComboBox1_1.setEnabled(false);
+            cargarMenuEscogerEnemigo();
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -351,6 +412,7 @@ public class Ordenes extends javax.swing.JPanel {
     public javax.swing.JButton jButtonOrdenar2;
     public javax.swing.JButton jButtonOrdenar3;
     public javax.swing.JComboBox<String> jComboBox1;
+    public javax.swing.JComboBox<String> jComboBox1_1;
     public javax.swing.JComboBox<String> jComboBox2;
     public javax.swing.JComboBox<String> jComboBox3;
     public javax.swing.JLabel jLabel1;
@@ -367,6 +429,7 @@ public class Ordenes extends javax.swing.JPanel {
     public javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
+    //Método que carga los comboBox de las órdenes o acciones del juego
     public void cargarMenu() {
         
         //System.out.println("CC:" + ventanaInicio.jTable5.getComponentCount());
@@ -374,6 +437,7 @@ public class Ordenes extends javax.swing.JPanel {
         int n_acciones = ventanaInicio.jTable5.getRowCount();
         try {
             
+            //Cargamos los combos de las acciones de los PJs
             System.out.println("COMPOS: " + ventanaInicio.jTable5.getValueAt(1, 2));
             for(int x=0; x<n_acciones;x++) {
                 jComboBox1.addItem((String) ventanaInicio.jTable5.getValueAt(x, 1));
@@ -382,6 +446,45 @@ public class Ordenes extends javax.swing.JPanel {
             }
         } catch (NullPointerException ex) {
             System.out.println("Esta excepcion: " + ex.getMessage() + ex.getLocalizedMessage());
+        }
+    }
+    public void cargarMenuEscogerLugar() {
+        //Posiciones del PJ escogido (Imaginaria... hay que calcularla)
+        int posPJx = 10;
+        int posPJy = 6;
+        //Eliminamos los datos anteriores
+        jComboBox1_1.removeAllItems();
+        //jComboBoxElegirCoor.setLocation(new java.awt.Point(150, 80));
+        try {
+            //Cargamos el combo con las casillas a las que puede acceder el PJ
+            for(int x=posPJx-3; x<posPJx+4;x++) {
+                for(int y=posPJy-3; y<posPJy+4;y++) {
+                    jComboBox1_1.addItem((String) (x + "-" + y));
+                }
+            }
+        } catch (NullPointerException ex) {
+            
+        }
+    }
+    
+    public void cargarMenuEscogerEnemigo() {
+        //Creamos el String con los Bandos que se cargarán de la BBDD
+        String[] bandos;
+        try {
+            //Abrimos la conexion con la BBDD
+            Dark.con.connect();
+            //Cargamos los datos
+            bandos = Dark.con.cargarBandos();
+            //Eliminamos los datos anteriores
+            jComboBox1_1.removeAllItems();
+            //Cargamos el comboBox con el array de los bandos
+            for(int x=0; x<bandos.length;x++) {
+                jComboBox1_1.addItem(bandos[x]);
+            }
+            //Cerramos la conexion
+            Dark.con.close();
+        } catch (NullPointerException ex) {
+            
         }
     }
 

@@ -48,16 +48,16 @@ public class Conector {
             urlBBDD = "../Dark/BBDD/BDDark.db"; //Para MAC
             System.out.println("Pasa por MAC");
         }
-        if(System.getProperty("os.name").compareTo("Windows") == 0) {
-            urlBBDD = "..\\DarkSceptreBeta\\BBDD\\BDDark.db"; //Para Windows
+        if(System.getProperty("os.name").compareTo("Windows 10") == 0) {
+            urlBBDD = "..\\Dark2\\BBDD\\BDDark.db"; //Para Windows
             System.out.println("Pasa por Windows");
         }
         if(System.getProperty("os.name").compareTo("Linux") == 0) {
-            urlBBDD = "../Dark2/BBDD/BDDark.db"; //Para MAC
+            urlBBDD = "../Dark2/BBDD/BDDark.db"; //Para LINUX
             System.out.println("Pasa por Linux");
         }
         //Comentar esto cuando no haya que usar el JFileChooser
-        //urlBBDD = archivoRuta.getPath(); //Desde Archivo
+        //urlBBDD = archivoRuta.getPath(); //Desde Archivo ESTA
         
         
         //A ver la ruta:
@@ -141,6 +141,60 @@ public class Conector {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+    
+    public void mostrarObjetos(){
+        ResultSet result = null;
+        try {
+            PreparedStatement st;
+            st = con.connect.prepareStatement("Select * FROM Objetos");
+            result = st.executeQuery();
+            while (result.next()) {
+                
+            // Se crea un array que será una de las filas de la tabla. 
+            Object [] fila = new Object[2]; // Hay tres columnas en la tabla
+
+            // Se rellena cada posición del array con una de las columnas de la tabla en base de datos.
+            for (int i=0;i<2;i++)
+                fila[i] = result.getObject(i+1); // El primer indice en rs es el 1, no el cero, por eso se suma 1.
+
+            // Se añade al modelo la fila completa.
+            ventanaInicio.objetos.addRow(fila);
+            
+            //modelo.addRow(fila); 
+            
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        
+    }
+    
+    public String[] cargarBandos(){
+        // Se crea un array que será una de las filas de la tabla. 
+        String [] fila = new String[7]; // Solo me interesan los valores de la columna 1
+        ResultSet result = null;
+        try {
+            PreparedStatement st;
+            st = con.connect.prepareStatement("Select Bando FROM Bandos");
+            result = st.executeQuery();
+            int i = 0; //Empezamos por el Elemento 0
+            while (result.next()) {
+            
+            // Se rellena cada posición del array con la columna de los Bandos.
+            fila[i] = result.getObject("Bando").toString();
+            System.out.println("FILA1: " + fila[i]);
+            
+            i++; 
+            
+            
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        //Se devuelve el array de String
+        return fila;
     }
  
     
