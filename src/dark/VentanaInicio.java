@@ -68,6 +68,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     Mapa mapaPJs;
     //Creamos el mapa de los objetos
     Mapa mapaObjetos;
+    //Creamos el mapa con los caminos
+    Mapa mapaCaminos;
     
     //Graphics cuadrado = null;
     BufferedImage cuadrado;
@@ -119,6 +121,15 @@ public class VentanaInicio extends javax.swing.JFrame {
         mapaFondo.rellenarMapa(); //Rellenamos con las coordenadas
         this.jLayeredPane1.add(mapaFondo, new Integer(1));
         
+        //Creamos el mapa con los caminos
+        mapaCaminos = new Mapa();
+        mapaCaminos.setBounds(1, 1, 1056, 530);
+        mapaCaminos.inicializarMapaVacio();
+        mapaCaminos.setVisible(true);
+        mapaCaminos.rellenarMapaSinCoordenadas();
+        mapaCaminos.inicializaCaminos();
+        this.jLayeredPane1.add(mapaCaminos, new Integer(2));
+        
         //Creamos el objeto del Mapa con los PJs
         mapaPJs = new Mapa();
         mapaPJs.setBounds(1, 1, 1056, 530);
@@ -126,7 +137,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         mapaPJs.setVisible(true);
         mapaPJs.rellenarMapaSinCoordenadas();
         
-        this.jLayeredPane1.add(mapaPJs, new Integer(2));
+        this.jLayeredPane1.add(mapaPJs, new Integer(3));
         
         //Creamos el objeto del Mapa de los Objetos
         mapaObjetos = new Mapa();
@@ -134,8 +145,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         mapaObjetos.inicializarMapaVacio();
         mapaObjetos.setVisible(true);
         mapaObjetos.rellenarMapaSinCoordenadas();
-        this.jLayeredPane1.add(mapaObjetos, new Integer(3));
+        this.jLayeredPane1.add(mapaObjetos, new Integer(4));
         //this.getContentPane().add(mapaObjetos, 2);
+        
+        
         
         
         //Casilla seleccionada del mapa
@@ -848,5 +861,6 @@ public class VentanaInicio extends javax.swing.JFrame {
             mapaObjetos.casillasMapa[coordenadaX][coordenadaY].setIcon(icon);
         }
     }
+    
 
 }

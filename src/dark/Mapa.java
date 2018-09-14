@@ -8,6 +8,7 @@ package dark;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.Border;
@@ -176,5 +177,91 @@ public class Mapa extends javax.swing.JLayeredPane {
             }
         }
     }
+    
+    public void inicializaCaminos() {
+        String rutaImagenes = "";
+        java.net.URL url = null;
+        ImageIcon icon = null;
+        for(int x=0;x<32;x++) {
+            for(int y=0;y<16;y++) {
+                //casillasMapa[x][y] = null;
+                casillasMapa[x][y].setText("");
+                casillasMapa[x][y].setSize(32, 32);
+                casillasMapa[x][y].setLocation(x+(32*x), y+(32*y));
+                
+                casillasMapa[x][y].setHorizontalAlignment(JLabel.CENTER);
+                casillasMapa[x][y].setForeground(new Color(220, 220, 220, 220));
+                //casillasMapa[x][y].setOpaque(false);
+                casillasMapa[x][y].setBackground(new Color(220, 220, 220, 0));//
+                //casillasMapa[x][y].setText(""+x+""+y);
+                
+                System.out.println("MAPA: " + x + ":" + y);
+                System.out.println("MAPAI: " + Constantes.mapaConCaminos[x][y]);
+                switch(Constantes.mapaConCaminos[x][y]) {
+                    case 1:
+                        rutaImagenes = "/images/casillaNorte.png";
+                        System.out.println("ASCO MAPA 1");
+                        break;
+                    case 2:
+                        rutaImagenes = "/images/casillaEste.png";
+                        break;
+                    case 3:
+                        rutaImagenes = "/images/casillaSur.png";
+                        break;
+                    case 4:
+                        rutaImagenes = "/images/casillaOeste.png";
+                        break;
+                    case 5:
+                        rutaImagenes = "/images/casillaNorteEste.png";
+                        break;
+                    case 6:
+                        rutaImagenes = "/images/casillaNorteSur.png";
+                        break;
+                    case 7:
+                        rutaImagenes = "/images/casillaOesteNorte.png";
+                        break;
+                    case 8:
+                        rutaImagenes = "/images/casillaEsteSur.png";
+                        break;
+                    case 9:
+                        rutaImagenes = "/images/casillaEsteOeste.png";
+                        break;
+                    case 10:
+                        rutaImagenes = "/images/casillaSurOeste.png";
+                        break;
+                    case 11:
+                        rutaImagenes = "/images/casillaSEN.png";
+                        break;
+                    case 12:
+                        rutaImagenes = "/images/casillaESO.png";
+                        break;
+                    case 13:
+                        rutaImagenes = "/images/casillaNOS.png";
+                        break;
+                    case 14:
+                        rutaImagenes = "/images/casillaONE.png";
+                        break;
+                    default:
+                        rutaImagenes = "/images/iconESPA.png";
+                        break;
+                }
+                
+                url = this.getClass().getResource(rutaImagenes);
+                //Cargamos el gráfico
+                icon = new ImageIcon(url);
+                //System.out.println("Coord2x: " + coordenadaX);
+            
+                //Dibujamos el gráfico en el mapa
+                casillasMapa[x][y].setIcon(icon);
+                
+                
+                //Añadimos las casillas al mapa-jPanel1
+                //this.add(casillasMapa[x][y]);
+                //jPanel1.add(casillasMapa[x][y]);
+                
+            }
+        }
+    }
+    
 
 }
