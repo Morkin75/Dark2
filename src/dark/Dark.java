@@ -59,6 +59,8 @@ public class Dark {
         rutaImagenes = "/images/CalleUD.png";   
         url = ventanaInicio.getClass().getResource(rutaImagenes);
         
+        
+        /*  NO BORRAR - ASÍ SE CARGAN LOS GRÁFICOS EN LOS LABELS
         //Cargamos el gráfico
         ImageIcon icon = new ImageIcon(url);
         //ventanaInicio.casillasMapa[5][6].setBackground(Color.black);
@@ -66,6 +68,7 @@ public class Dark {
         ventanaInicio.mapaFondo.casillasMapa[5][6].setText("");//Para alinear el gráfico no puede haber texto en el label
         
         ventanaInicio.mapaFondo.casillasMapa[5][6].setIcon(icon);
+        */
         
         //Inicializamos y mostramos la ventana
         ventanaInicio.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -84,19 +87,24 @@ public class Dark {
         
         /* De aquí para abajo, comentado si usamos JFileChooser*/
         //Abrimos la conexión automática. Comentar todas las llamadas de con cuando haya que cargar con el JFileChoose
+        
         con.connect(); //ESTA
         
         //Cargamos la tabla de las acciones. Comentamos esto cuando queramos usar el JFileChoose
         con.mostrarAcciones(); //ESTA
         
+        
+        //Cargamos la tabla de los personajes - PJs antes que acciones
+        con.mostrarPersonajes();  //ESTA
         //Cargamos las acciones de los menus
         ventanaInicio.ordenes.cargarMenu(); //ESTA
         //Si la acción es la de mover...
         ventanaInicio.ordenes.cargarMenuEscogerLugar(); //ESTA
         ventanaInicio.ordenes.jComboBox1_1.setVisible(false); //ESTA
         
-        //Cargamos la tabla de los personajes
-        con.mostrarPersonajes();  //ESTA
+        
+        
+        
         
         //Cargamos la tabla de los objetos
         con.mostrarObjetos();  //ESTA
@@ -109,6 +117,8 @@ public class Dark {
         
         //Cerramos la conexión
         con.close();  //ESTA
+        
+        
         
     }
     

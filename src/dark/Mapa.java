@@ -195,8 +195,8 @@ public class Mapa extends javax.swing.JLayeredPane {
                 casillasMapa[x][y].setBackground(new Color(220, 220, 220, 0));//
                 //casillasMapa[x][y].setText(""+x+""+y);
                 
-                System.out.println("MAPA: " + x + ":" + y);
-                System.out.println("MAPAI: " + Constantes.mapaConCaminos[x][y]);
+                //System.out.println("MAPA: " + x + ":" + y);
+                //System.out.println("MAPAI: " + Constantes.mapaConCaminos[x][y]);
                 switch(Constantes.mapaConCaminos[x][y]) {
                     case 1:
                         rutaImagenes = "/images/casillaNorte.png";
@@ -242,7 +242,7 @@ public class Mapa extends javax.swing.JLayeredPane {
                         rutaImagenes = "/images/casillaONE.png";
                         break;
                     default:
-                        rutaImagenes = "/images/iconESPA.png";
+                        rutaImagenes = "/images/casillaVacia.png";
                         break;
                 }
                 

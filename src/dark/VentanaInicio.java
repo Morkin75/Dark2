@@ -45,7 +45,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     
     //Array de casillas del mapa
     //public JLabel[][] casillasMapaGraficosPJ;
-    public JSeparator separador3;
+    public JSeparator separador2;
     
     //Creamos un array para almacenar las ordenes de los personajes
     //public EnviarOrdenes[] ordenesPJ;
@@ -62,6 +62,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     Acciones panelAcciones;
     Acciones panelObjetos;
     
+    
+    
     //Creamos un objeto del Mapa
     Mapa mapaFondo;
     //Creamos otro mapa para los PJs
@@ -70,6 +72,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     Mapa mapaObjetos;
     //Creamos el mapa con los caminos
     Mapa mapaCaminos;
+    //Creamos mapa para ver las posibles casilla de movimiento
+    Mapa mapaMovimiento;
     
     //Graphics cuadrado = null;
     BufferedImage cuadrado;
@@ -85,32 +89,44 @@ public class VentanaInicio extends javax.swing.JFrame {
     
     //Coordenadas donde hemos pulsado para ver la casilla del mapa
     int posMapaX, posMapaY;
+    
+    //Creamos el ArrayList con los PJs
+    public ArrayList<Personajes> personajesBando1 = new ArrayList<>();
+    
     /**
      * Creates new form VentanaInicio
      */
     public VentanaInicio() {
         initComponents();
+        //Alto y ancho de la pantalla
         this.setBounds((ancho/2) - (this.getWidth()/2), (alto/2) - (this.getHeight()/2), 1024, 768);
+        
+        PJ=1;
         
         //Creamos un objeto del panel de Ordenes
         ordenes = new Ordenes();
         //Añadimos el objeto a este formulario
         this.add(ordenes);
         //Establecemos el tamaño y posición del objeto, y lo hacemos visible
-        ordenes.setBounds(602, 392, 400, 234);
+        ordenes.setBounds(610, 402, 400, 234);
         ordenes.setVisible(true);
+        //ordenes.jPestania1.add(ordenes.mover);
+        //ordenes.mover.setVisible(false);
+        
+        
+        
 
         //Creamos el objeto del panel acciones
         panelAcciones = new Acciones();
         //Añadimos el objeto al formulario
         this.add(panelAcciones);
-        panelAcciones.setBounds(602, 392, 400, 234);
+        panelAcciones.setBounds(610, 402, 400, 234);
         panelAcciones.setVisible(false);
         
         //Creamos el objeto del panel objeto
         panelObjetos = new Acciones();
         this.add(panelObjetos);
-        panelObjetos.setBounds(602, 392, 400, 234);
+        panelObjetos.setBounds(610, 402, 400, 234);
         panelObjetos.setVisible(false);
         
         //Creamos el objeto del Mapa
@@ -148,15 +164,22 @@ public class VentanaInicio extends javax.swing.JFrame {
         this.jLayeredPane1.add(mapaObjetos, new Integer(4));
         //this.getContentPane().add(mapaObjetos, 2);
         
+        //Creamos el objeto del Mapa de los Objetos
+        mapaMovimiento = new Mapa();
+        mapaMovimiento.setBounds(1, 1, 1056, 530);
+        mapaMovimiento.inicializarMapaVacio();
+        mapaMovimiento.setVisible(true);
+        mapaMovimiento.rellenarMapaSinCoordenadas();
+        this.jLayeredPane1.add(mapaMovimiento, new Integer(5));
         
-        
+        //jTable2.setColumnSelectionAllowed(false);
         
         //Casilla seleccionada del mapa
         posMapaX = 0;
         posMapaY = 0;
         
         //Inicializamos el separador. MEJORAR
-        separador3 = new JSeparator();
+        separador2 = new JSeparator();
         
         
         //cuadrado = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
@@ -176,8 +199,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         separador2.setBackground(Color.BLUE);
         separador2.setOrientation(SwingConstants.VERTICAL);
         
-        separador2.setSize(12, 255);
-        separador2.setLocation(606, 400);
+        separador2.setBounds(589, 390, 10, 325);
+        this.add(separador2);
+        
+        //System.out.println("SEPARADOR1: " + separador1.getBounds().toString());
+        //System.out.println("SEPARADOR2: " + separador2.getBounds().toString());
         
         //Preparamos el modelo de la tabla de Acciones
         acciones.addColumn("Número");
@@ -230,6 +256,7 @@ public class VentanaInicio extends javax.swing.JFrame {
             ordenesPJ.add(new EnviarOrdenes(-1, -1, -1, -1));
         }
         
+        
         //inicializamos el array de las órdenes a enviar
         
     }
@@ -247,7 +274,6 @@ public class VentanaInicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         separador1 = new javax.swing.JSeparator();
-        separador2 = new javax.swing.JSeparator();
         jScrollJuego = new javax.swing.JScrollPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -288,6 +314,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         };
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -348,8 +375,6 @@ public class VentanaInicio extends javax.swing.JFrame {
         jScrollMapa.setViewportView(jPanel1);
 
         separador1.setOpaque(true);
-
-        separador2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jScrollJuego.setName("jScrollJuego"); // NOI18N
 
@@ -428,6 +453,14 @@ public class VentanaInicio extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton3.setSelected(true);
+        jToggleButton3.setText("Mapa");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Mostrar Ordenes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -464,29 +497,24 @@ public class VentanaInicio extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(591, 591, 591)
-                                .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 300, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(separador1)))
+                .addContainerGap()
+                .addComponent(separador1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -496,6 +524,8 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToggleButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton2)))
@@ -505,8 +535,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addComponent(jScrollJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
-                .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         pack();
@@ -530,6 +559,18 @@ public class VentanaInicio extends javax.swing.JFrame {
         //desplazarX = evt.getX();
         //desplazarY = evt.getY();
         
+        //Código que indica el PJ escogido en el mapa en la tabla de PJs
+        //Recorremos la lista
+        for(int i=0;i<personajesBando1.size();i++) {
+            //Si alguno de los PJs coincide en coordenadas con las pulsadas...
+            if(personajesBando1.get(i).getPosX()==posMapaX && personajesBando1.get(i).getPosY()==posMapaY) {
+                //Lo mostramos en el Jtable de los PJs
+                System.out.println("Debe Mostrarlo");
+                
+                ventanaInicio.jTable2.changeSelection(i, 1, false, false);
+            }
+        }
+        
     }//GEN-LAST:event_jScrollMapaMousePressed
 
     private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
@@ -547,17 +588,17 @@ public class VentanaInicio extends javax.swing.JFrame {
         //A ver la ruta:
         System.out.println(abre.getPath());
         //Comentar esto cuando queramos abrir la BBDD directamente:
-        //Dark.con.archivoRuta = abre; //ESTE
-        //Dark.con.connect(); //ESTE
-        //Dark.con.mostrarAcciones(); //ESTE
-        //ventanaInicio.ordenes.cargarMenu(); //ESTE
-        //ventanaInicio.ordenes.cargarMenuEscogerLugar(); //ESTA
-        //ventanaInicio.ordenes.jComboBox1_1.setVisible(false); //ESTA
-        //Dark.con.mostrarPersonajes(); //ESTE
-        //Dark.con.mostrarObjetos();  //ESTA
-        //ventanaInicio.mostrarPJs();  //ESTA
-        //ventanaInicio.mostrarObjetos();  //ESTA
-        //Dark.con.close(); //ESTE
+        /*Dark.con.archivoRuta = abre; //ESTE
+        Dark.con.connect(); //ESTE
+        Dark.con.mostrarAcciones(); //ESTE
+        ventanaInicio.ordenes.cargarMenu(); //ESTE
+        ventanaInicio.ordenes.cargarMenuEscogerLugar(); //ESTA
+        ventanaInicio.ordenes.jComboBox1_1.setVisible(false); //ESTA
+        Dark.con.mostrarPersonajes(); //ESTE
+        Dark.con.mostrarObjetos();  //ESTA
+        ventanaInicio.mostrarPJs();  //ESTA
+        ventanaInicio.mostrarObjetos();  //ESTA
+        Dark.con.close(); //ESTE */
         //IR A LA CLASE CONECTOR Y DESCOMENTAR LA ULTIMA LINEA PARA QUE LEA LA RUTA
         //Hasta aquí
     }//GEN-LAST:event_jMenuItem1MousePressed
@@ -634,19 +675,21 @@ public class VentanaInicio extends javax.swing.JFrame {
         //ESTO ES PARA LA PESTAÑA 1
         if(ordenesPJ.get(PJ).accion1 < 0) { // Si la accion es menor que 0 significa que todavía no se ha indicado la accion de ese PJ
             Dark.ventanaInicio.ordenes.jComboBox1.setSelectedIndex(0); //Ponemos siempre la primera accion
-            Dark.ventanaInicio.ordenes.jComboBox1.setEnabled(true); //Combo y boton aceptar actiado
+            Dark.ventanaInicio.ordenes.jComboBox1.setEnabled(true); //Combo y boton aceptar activado
             Dark.ventanaInicio.ordenes.jButtonOrdenar1.setEnabled(true); //Boton Aceptar Activado
+            //Dark.ventanaInicio.ordenes.mover.setVisible(true); //Mostramos las opciones para mover el PJ
             Dark.ventanaInicio.ordenes.jButtonCancelar1.setEnabled(false);//Boton desactivado
             System.out.println("Desde la ventana de inicio: " + ordenesPJ.get(PJ).accion1);
         } else { //Si entramos aquí es porque el PJ ya tiene acción adjudicada
-            Dark.ventanaInicio.ordenes.jComboBox1.setEnabled(false); //Se anula el botón
+            Dark.ventanaInicio.ordenes.jComboBox1.setEnabled(false); //Se anula el ComboBox
             System.out.println("Desde la ventana de inicio P1: " + ordenesPJ.get(PJ).accion1);
             //Recuperamos la acción de ese PJ poniendola en el combobox
             int accion = ordenesPJ.get(PJ).accion1;
             Dark.ventanaInicio.ordenes.jComboBox1.setSelectedIndex(accion);
             //Ponemos botones en orden
-            Dark.ventanaInicio.ordenes.jButtonOrdenar1.setEnabled(false); //Boton Aceptar Activado
-            Dark.ventanaInicio.ordenes.jButtonCancelar1.setEnabled(true);//Boton desactivado
+            Dark.ventanaInicio.ordenes.jButtonOrdenar1.setEnabled(false); //Boton Aceptar Desactivado
+            Dark.ventanaInicio.ordenes.jButtonCancelar1.setEnabled(true);//Boton Activado
+            //Dark.ventanaInicio.ordenes.mover.setVisible(false); //Escondemos las opciones para mover el PJ
         }
         //ESTO ES PARA LA PESTAÑA 2
         if(ordenesPJ.get(PJ).accion2 < 0) { // Si la accion es menor que 0 significa que todavía no se ha indicado la accion de ese PJ
@@ -769,6 +812,14 @@ public class VentanaInicio extends javax.swing.JFrame {
         Dark.ventanaInicio.panelObjetos.jTextInfo.setText(" " + String.valueOf(objetos.getValueAt(jTable4.getSelectedRow(), 1)));        // TODO add your handling code here:
     }//GEN-LAST:event_jTable4MousePressed
 
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        if(jToggleButton3.isSelected()) {
+            mapaCaminos.setVisible(true);
+        } else {
+            mapaCaminos.setVisible(false);
+        }
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;
@@ -794,8 +845,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JTable jTable5;
     public javax.swing.JToggleButton jToggleButton1;
     public javax.swing.JToggleButton jToggleButton2;
+    public javax.swing.JToggleButton jToggleButton3;
     public javax.swing.JSeparator separador1;
-    public javax.swing.JSeparator separador2;
     // End of variables declaration//GEN-END:variables
 
     

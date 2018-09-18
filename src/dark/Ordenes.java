@@ -14,7 +14,18 @@ import javax.swing.JComboBox;
  */
 public class Ordenes extends javax.swing.JPanel {
 
+    //Creamos un panel con los Botones para mover
+    public Mover mover;
     
+    //Variable para almacenar los puntos de movimiento del PJ
+    public int movi;
+    
+    //Variable para almacenar la posicion del PJ
+    int posPJx;
+    int posPJy;
+    
+    //Variable que almacena el codigo del mapa con las posibles salidas de movimiento
+    int codPJ;
     
     /**
      * Creates new form Ordenes
@@ -22,7 +33,19 @@ public class Ordenes extends javax.swing.JPanel {
     public Ordenes() {
         initComponents();
         
+        //Submenu para mover PJs
+        //mover = new Mover();
+        //mover.setBounds(76, 40, 240, 86);
         
+        //this.jPestania1.add(mover);
+        //System.out.println("ES VISIBLE? "+mover.isVisible());
+        
+        
+        //mover.setVisible(false);
+        //mover.setEnabled(false);
+        //this.add(mover, 0);
+        
+        //System.out.println("POSICION: " + this.getComponentZOrder(jPestania4));
         
     }
 
@@ -36,26 +59,26 @@ public class Ordenes extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPestania1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jButtonOrdenar1 = new javax.swing.JButton();
         jButtonCancelar1 = new javax.swing.JButton();
         jComboBox1_1 = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
+        jPestania2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jButtonOrdenar2 = new javax.swing.JButton();
         jButtonCancelar2 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        jPestania3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jButtonOrdenar3 = new javax.swing.JButton();
         jButtonCancelar3 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jPestania4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -99,49 +122,49 @@ public class Ordenes extends javax.swing.JPanel {
         jComboBox1_1.setMinimumSize(new java.awt.Dimension(100, 27));
         jComboBox1_1.setSize(new java.awt.Dimension(200, 0));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPestania1Layout = new javax.swing.GroupLayout(jPestania1);
+        jPestania1.setLayout(jPestania1Layout);
+        jPestania1Layout.setHorizontalGroup(
+            jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania1Layout.createSequentialGroup()
+                .addGroup(jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPestania1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonOrdenar1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPestania1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, 0, 284, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPestania1Layout.createSequentialGroup()
                                 .addComponent(jComboBox1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPestania1Layout.setVerticalGroup(
+            jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonOrdenar1)
                         .addComponent(jButtonCancelar1))))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("jLabel1");
 
-        jTabbedPane1.addTab("Acción 1", jPanel2);
+        jTabbedPane1.addTab("Acción 1", jPestania1);
 
         jLabel2.setText("Acción:");
 
@@ -165,19 +188,19 @@ public class Ordenes extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPestania2Layout = new javax.swing.GroupLayout(jPestania2);
+        jPestania2.setLayout(jPestania2Layout);
+        jPestania2Layout.setHorizontalGroup(
+            jPestania2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania2Layout.createSequentialGroup()
+                .addGroup(jPestania2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPestania2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPestania2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar2)
@@ -185,24 +208,24 @@ public class Ordenes extends javax.swing.JPanel {
                         .addComponent(jButtonOrdenar2)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPestania2Layout.setVerticalGroup(
+            jPestania2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPestania2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPestania2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPestania2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonOrdenar2)
                         .addComponent(jButtonCancelar2))))
         );
 
         jLabel2.getAccessibleContext().setAccessibleName("jLabel2");
 
-        jTabbedPane1.addTab("Acción 2", jPanel3);
+        jTabbedPane1.addTab("Acción 2", jPestania2);
 
         jLabel3.setText("Acción:");
 
@@ -226,18 +249,18 @@ public class Ordenes extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPestania3Layout = new javax.swing.GroupLayout(jPestania3);
+        jPestania3.setLayout(jPestania3Layout);
+        jPestania3Layout.setHorizontalGroup(
+            jPestania3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania3Layout.createSequentialGroup()
+                .addGroup(jPestania3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPestania3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox3, 0, 284, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(jPestania3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar3)
@@ -245,41 +268,41 @@ public class Ordenes extends javax.swing.JPanel {
                         .addComponent(jButtonOrdenar3)))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPestania3Layout.setVerticalGroup(
+            jPestania3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPestania3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPestania3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPestania3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonOrdenar3)
                         .addComponent(jButtonCancelar3))))
         );
 
-        jTabbedPane1.addTab("Acción 3", jPanel4);
+        jTabbedPane1.addTab("Acción 3", jPestania3);
 
         jLabel4.setText("          ");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPestania4Layout = new javax.swing.GroupLayout(jPestania4);
+        jPestania4.setLayout(jPestania4Layout);
+        jPestania4Layout.setHorizontalGroup(
+            jPestania4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPestania4Layout.createSequentialGroup()
                 .addComponent(jLabel4)
                 .addGap(0, 321, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        jPestania4Layout.setVerticalGroup(
+            jPestania4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPestania4Layout.createSequentialGroup()
                 .addGap(0, 154, Short.MAX_VALUE)
                 .addComponent(jLabel4))
         );
 
-        jTabbedPane1.addTab("Información", jPanel5);
+        jTabbedPane1.addTab("Información", jPestania4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -396,9 +419,9 @@ public class Ordenes extends javax.swing.JPanel {
             ventanaInicio.ordenes.jComboBox1_1.setVisible(true);
             ventanaInicio.ordenes.jComboBox1_1.setEnabled(true);
             cargarMenuEscogerLugar();
-        } else {
-            //ventanaInicio.ordenes.jComboBox1_1.setVisible(false);
-            //ventanaInicio.ordenes.jComboBox1_1.setEnabled(false);
+        } else {           
+            ventanaInicio.ordenes.jComboBox1_1.setVisible(false);
+            ventanaInicio.ordenes.jComboBox1_1.setEnabled(false);
             cargarMenuEscogerEnemigo();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -422,10 +445,10 @@ public class Ordenes extends javax.swing.JPanel {
     public javax.swing.JLabel jLabel5;
     public javax.swing.JLabel jLabel6;
     public javax.swing.JLabel jLabel7;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPestania1;
+    public javax.swing.JPanel jPestania2;
+    public javax.swing.JPanel jPestania3;
+    public javax.swing.JPanel jPestania4;
     public javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
@@ -449,20 +472,190 @@ public class Ordenes extends javax.swing.JPanel {
         }
     }
     public void cargarMenuEscogerLugar() {
-        //Posiciones del PJ escogido (Imaginaria... hay que calcularla)
-        int posPJx = 10;
-        int posPJy = 6;
+        //Posiciones del PJ escogido - Vemos en el ArrayList la posición del PJ
+        posPJx = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosX();
+        posPJy = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosY();
         //Eliminamos los datos anteriores
         jComboBox1_1.removeAllItems();
         //jComboBoxElegirCoor.setLocation(new java.awt.Point(150, 80));
-        try {
+        //Guardamos el movimiento en una variable para tener un acceso más rápido
+        movi = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getMov();
+        /*try {
             //Cargamos el combo con las casillas a las que puede acceder el PJ
-            for(int x=posPJx-3; x<posPJx+4;x++) {
-                for(int y=posPJy-3; y<posPJy+4;y++) {
+            //Primero recorremos el bucle - Dependerá de las casillas de movimiento del PJ
+            for(int x=posPJx-movi; x<posPJx+movi+1;x++) {
+                for(int y=posPJy-movi; y<posPJy+movi+1;y++) {
+                    //Vamos a comprobar si la casilla está disponible
+                    movimientoN1();
                     jComboBox1_1.addItem((String) (x + "-" + y));
                 }
             }
         } catch (NullPointerException ex) {
+            
+        }*/
+        codPJ = Constantes.mapaConCaminos[posPJx][posPJy];
+        //Vamos a prescindir del bucle. Preguntamos por el código de la casilla del PJ
+        System.out.println("MUESTRA CODPJ: " + codPJ);
+        System.out.println("Primeras coordenadas: " + posPJx + ":::" + posPJy);
+        //moverADireccion(Constantes.mapaConCaminos[posPJx][posPJy], 0, posPJx, posPJy);
+        switch(codPJ) {
+            case 5:
+                irNorte(codPJ, movi, posPJx, posPJy);
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 6:
+                irNorte(codPJ, movi, posPJx, posPJy);
+                irSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 7:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                irNorte(codPJ, movi, posPJx, posPJy);
+                break;
+            case 8:
+                irSur(codPJ, movi, posPJx, posPJy);
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 9:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 10:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                irSur(codPJ, movi, posPJx, posPJy);
+                break;
+        }
+        
+    }
+    
+    public void irOeste(int codigo, int casillas, int pX, int pY) {
+        int nuevaX = pX-1;
+        int nuevaY = pY;
+        if(casillas > 0) { //Preguntamos si quedan movimientos
+            jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
+            int nuevasCasillas = casillas -1;
+            switch (nuevocodPJ) { //Si vamos al oeste, la casilla que podemos encontrar será código: 5-8-9-11-12-14
+                case 5: //De este a Norte
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 8: //De este a sur
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 9: //De este a oeste
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 11: //De este a Norte y Sur
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 12: //De este a Oeste y sur
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 14: //De este a Oeste y Norte
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+            }
+            
+        }
+    }
+    public void irEste(int codigo, int casillas, int pX, int pY) {
+        int nuevaX = pX+1;
+        int nuevaY = pY;
+        if(casillas > 0) { //Preguntamos si quedan movimientos
+            jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
+            int nuevasCasillas = casillas -1;
+            switch (nuevocodPJ) { //Si vamos al este, la casilla que podemos encontrar será código: 7-9-10-12-13-14
+                case 7: //De Oeste a Norte
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 9: //De Oeste a Este
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 10: //De Oeste a Sur
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 12: //De oeste a Sur y Este
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 13: //De oeste a norte y sur
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 14: //De oeste a norte y este
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+            }
+            
+        }
+    }
+    public void irNorte(int codigo, int casillas, int pX, int pY) {
+        int nuevaX = pX;
+        int nuevaY = pY-1;
+        if(casillas > 0) { //Preguntamos si quedan movimientos
+            jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
+            int nuevasCasillas = casillas -1;
+            switch (nuevocodPJ) { //Si vamos al norte, la casilla que podemos encontrar será código: 6-8-10-11-12-13
+                case 6: //De norte a sur
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 8: //De norte a este
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 10: //De norte a oeste
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 11: //De norte a este y sur
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 12: //De norte a este y oeste
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 13: //De norte a oeste y sur
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+            }
+            
+        }
+    }
+    public void irSur(int codigo, int casillas, int pX, int pY) {
+        int nuevaX = pX;
+        int nuevaY = pY+1;
+        if(casillas > 0) { //Preguntamos si quedan movimientos
+            jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
+            int nuevasCasillas = casillas -1;
+            switch (nuevocodPJ) { //Si vamos al sur, la casilla que podemos encontrar será código: 5-6-7-11-13-14
+                case 5: //De sur a este
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 6: //De sur a norte
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 7: //De sur a oeste
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 11: //De sur a este y norte
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 13: //De sur a oeste y norte
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+                case 14: //De sur a este y oeste
+                    irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    break;
+            }
             
         }
     }
@@ -486,6 +679,145 @@ public class Ordenes extends javax.swing.JPanel {
         } catch (NullPointerException ex) {
             
         }
+    }
+    
+    //Método para comprobar si las casillas a las que el PJ están disponibles para mover
+    public void movimientoN1(String dir, int posX, int posY, int limite) {
+        System.out.println("CoordenadaX: " + posX);
+        System.out.println("CoordenadaY: " + posY);
+        System.out.println("El PJ Está en código: " + Constantes.mapaConCaminos[posPJx][posPJy]);
+        
+        switch(dir) {
+            case "OESTE":
+                //Vamos al OESTE
+                if(limite>0) { //Si nos quedan casillas por mover...
+                    //System.out.println("A VER: " + jComboBox1_1.getComponentCount());
+                    jComboBox1_1.addItem((String) ((posX-1) + "-" + posY)); //Añadimos la casilla al combo
+                    codPJ = Constantes.mapaConCaminos[posPJx-1][posPJy]; //Añadimos el código de la nueva casilla
+                    //Preguntamos por el nuevo código para llamar a la función recursiva
+                    //posPJx--;
+                    moverADireccion(codPJ, 2, posPJx, posPJy); //Venimos del este
+                    //movimientoN1("OESTE", posX-1, posY, limite-1); //Funcion recursiva. La volvemos a llamar para calcular una nueva casilla. Restamos 1 al eje X ya que movemos al oeste
+                }
+                break;
+            case "ESTE":
+                //Vamos al ESTE
+                if(limite>0) { //Si nos quedan casillas por mover...
+                    jComboBox1_1.addItem((String) ((posX+1) + "-" + posY)); //Añadimos la casilla al combo
+                    codPJ = Constantes.mapaConCaminos[posPJx+1][posPJy]; //Añadimos el código de la nueva casilla
+                    //Preguntamos por el nuevo código para llamar a la función recursiva
+                    //posPJx++;
+                    moverADireccion(codPJ,4, posPJx, posPJy); //venimos del oeste
+                    //movimientoN1("OESTE", posX-1, posY, limite-1); //Funcion recursiva. La volvemos a llamar para calcular una nueva casilla. Restamos 1 al eje X ya que movemos al oeste
+                }
+                break;
+            case "SUR":
+                //Vamos también al SUR
+                if(limite>0) { //Si nos quedan casillas por mover...
+                    jComboBox1_1.addItem((String) (posX + "-" + (posY+1))); //Añadimos la casilla al combo
+                    codPJ = Constantes.mapaConCaminos[posPJx][posPJy+1]; //Añadimos el código de la nueva casilla
+                    //posPJy++;
+                    moverADireccion(codPJ, 1, posPJx, posPJy); //Venimos del norte
+                    //movimientoN1("SUR", posX, posY+1, limite-1); //Funcion recursiva. La volvemos a llamar para calcular una nueva casilla. Restamos 1 al eje X ya que movemos al oeste
+                }
+                break;
+            case "NORTE":
+                //Vamos también al NORTE
+                if(limite>0) { //Si nos quedan casillas por mover...
+                    jComboBox1_1.addItem((String) (posX + "-" + (posY-1))); //Añadimos la casilla al combo
+                    codPJ = Constantes.mapaConCaminos[posPJx][posPJy-1]; //Añadimos el código de la nueva casilla
+                    //posPJy--;
+                    moverADireccion(codPJ, 3, posPJx, posPJy); //Venimos del sur
+                    //movimientoN1("SUR", posX, posY+1, limite-1); //Funcion recursiva. La volvemos a llamar para calcular una nueva casilla. Restamos 1 al eje X ya que movemos al oeste
+                }
+                break;
+                
+        }
+        System.out.println("El PJ Está en código2: " + codPJ);
+    }
+    
+    //Este método calculará el código de la nueva casilla, por tanto, la nueva dirección a tomar
+    public void moverADireccion(int codigo, int desde, int posPJx, int posPJy) {
+        String direccion="";
+        System.out.println("REcibo: " + codigo + ":" + desde);
+        
+        switch(codigo) {
+            case 5: //Norte-Este
+                //Tenemos que comprobar si venimos del norte o del este
+                //Llamamos a la función para cargar un valor en el comboBox
+                if(desde!=1) {//Venimos del sur 
+                    //posPJy--;
+                    movimientoN1("NORTE", posPJx, posPJy, movi); //Vamos al Norte
+                }
+                if(desde!=4) {//Venimos del oeste
+                    //posPJx++;
+                    movimientoN1("ESTE", posPJx, posPJy, movi); //También vamos al este
+                }
+                break;
+            case 6: //Norte-Sur
+                //Llamamos a la función para cargar un valor en el comboBox
+                if(desde!=1) {
+                    //posPJy--;
+                    movimientoN1("NORTE", posPJx, posPJy, movi); //Vamos al Norte
+                }
+                if(desde!=3) {
+                    //posPJy++;
+                    movimientoN1("SUR", posPJx, posPJy, movi); //También vamos al este
+                }
+                break;
+            case 7: //Norte-Oeste
+                //Llamamos a la función para cargar un valor en el comboBox
+                if(desde!=1) {
+                    //posPJy--;
+                    movimientoN1("NORTE", posPJx, posPJy, movi); //Vamos al Norte
+                }
+                if(desde!=2) {//Venimos del este
+                    //posPJx--;
+                    movimientoN1("OESTE", posPJx, posPJy, movi); //También vamos al este
+                }
+                break;
+            case 8: //Este-Sur
+                //Llamamos a la función para cargar un valor en el comboBox
+                if(desde!=4)  {//Venimos del oeste
+                    //posPJx++;
+                    movimientoN1("ESTE", posPJx, posPJy, movi); //Vamos al Norte
+                }
+                if(desde!=3) {
+                    //posPJy++;
+                    movimientoN1("SUR", posPJx, posPJy, movi); //También vamos al este
+                }
+                break;
+            case 9: //Este-Oeste
+                //Tenemos que comprobar si venimos del oeste o del este
+                if(desde!=4) {//Venimos del oeste
+                //Llamamos a la función para cargar un valor en el comboBox
+                    //posPJx++;
+                    movimientoN1("ESTE", posPJx, posPJy, movi); //Vamos al Norte
+                }
+                if(desde!=2) {
+                    //posPJx--;
+                    movimientoN1("OESTE", posPJx, posPJy, movi); //También vamos al este
+                }
+                break;
+            case 10: //Oeste-Sur
+                //Tenemos que comprobar si venimos del norte o del este
+                
+                //Llamamos a la función para cargar un valor en el comboBox
+                if(desde!=2) {//Venimos del este
+                    //posPJx--;
+                    movimientoN1("OESTE", posPJx, posPJy, movi); //Vamos al oeste
+                }
+                if(desde!=3) {
+                    //posPJy++;
+                    movimientoN1("SUR", posPJx, posPJy, movi); //También vamos al sur
+                }
+                break;
+            
+        }        
+        
+        
+        
+        //return direccion;
     }
 
 }
