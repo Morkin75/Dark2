@@ -200,7 +200,6 @@ public class Mapa extends javax.swing.JLayeredPane {
                 switch(Constantes.mapaConCaminos[x][y]) {
                     case 1:
                         rutaImagenes = "/images/casillaNorte.png";
-                        System.out.println("ASCO MAPA 1");
                         break;
                     case 2:
                         rutaImagenes = "/images/casillaEste.png";
@@ -261,6 +260,11 @@ public class Mapa extends javax.swing.JLayeredPane {
                 
             }
         }
+    }
+    
+    void rellenaRuta(int posx, int posy) { //Método para rellenar la ruta de los posibles caminos
+        casillasMapa[posx][posy].setBackground(new Color(100, 200, 200, 255));
+        //System.out.println("RELLENAMAPA: " + posx + ":" + posy);
     }
     
 

@@ -8,10 +8,12 @@ package dark;
 import static dark.Dark.ventanaInicio;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -19,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.print.attribute.standard.JobImpressionsCompleted;
 
 import javax.swing.*;
 import static javax.swing.SwingConstants.CENTER;
@@ -47,9 +50,12 @@ public class VentanaInicio extends javax.swing.JFrame {
     //public JLabel[][] casillasMapaGraficosPJ;
     public JSeparator separador2;
     
-    //Creamos un array para almacenar las ordenes de los personajes
+    //Creamos un array para almacenar las ordenes de los personajes. Se guardará en el archivo junto con las subórdenes
     //public EnviarOrdenes[] ordenesPJ;
     public ArrayList<EnviarOrdenes> ordenesPJ = new ArrayList<>();
+    //Creamos el Array de clases para guardar los parámetros de las acciones. Esta tendrá que ser incluida en un archivo junto con las acciones
+    public ArrayList<SubOrdenes> subOrdenes = new ArrayList<>();
+    
     
     
     //Objeto para saber la ruta del archivo de la BBDD
@@ -61,8 +67,6 @@ public class VentanaInicio extends javax.swing.JFrame {
     //Creamos un objeto del panel de Acciones
     Acciones panelAcciones;
     Acciones panelObjetos;
-    
-    
     
     //Creamos un objeto del Mapa
     Mapa mapaFondo;
@@ -103,6 +107,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         
         PJ=1;
         
+        
         //Creamos un objeto del panel de Ordenes
         ordenes = new Ordenes();
         //Añadimos el objeto a este formulario
@@ -137,6 +142,15 @@ public class VentanaInicio extends javax.swing.JFrame {
         mapaFondo.rellenarMapa(); //Rellenamos con las coordenadas
         this.jLayeredPane1.add(mapaFondo, new Integer(1));
         
+        //Creamos el objeto del Mapa de los Movimientos
+        mapaMovimiento = new Mapa();
+        mapaMovimiento.setBounds(1, 1, 1056, 530);
+        mapaMovimiento.inicializarMapaConTextoLabel();
+        //mapaMovimiento.inicializarMapaVacio();
+        mapaMovimiento.setVisible(true);
+        mapaMovimiento.rellenarMapaSinCoordenadas();
+        //this.jLayeredPane1.add(mapaMovimiento, new Integer(2));
+        
         //Creamos el mapa con los caminos
         mapaCaminos = new Mapa();
         mapaCaminos.setBounds(1, 1, 1056, 530);
@@ -164,13 +178,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         this.jLayeredPane1.add(mapaObjetos, new Integer(4));
         //this.getContentPane().add(mapaObjetos, 2);
         
-        //Creamos el objeto del Mapa de los Objetos
-        mapaMovimiento = new Mapa();
-        mapaMovimiento.setBounds(1, 1, 1056, 530);
-        mapaMovimiento.inicializarMapaVacio();
-        mapaMovimiento.setVisible(true);
-        mapaMovimiento.rellenarMapaSinCoordenadas();
-        this.jLayeredPane1.add(mapaMovimiento, new Integer(5));
+        
         
         //jTable2.setColumnSelectionAllowed(false);
         
@@ -552,6 +560,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                 
         System.out.println("Label 0,0 está en: " + mapaFondo.casillasMapa[0][0].getLocation().toString());
         //Cambiamos de color la casilla marcada
+        mapaMovimiento.limpiarMapa();
         mapaFondo.limpiarMapa();
         mapaFondo.casillasMapa[posMapaX][posMapaY].setBackground(Color.CYAN);
         
@@ -565,8 +574,6 @@ public class VentanaInicio extends javax.swing.JFrame {
             //Si alguno de los PJs coincide en coordenadas con las pulsadas...
             if(personajesBando1.get(i).getPosX()==posMapaX && personajesBando1.get(i).getPosY()==posMapaY) {
                 //Lo mostramos en el Jtable de los PJs
-                System.out.println("Debe Mostrarlo");
-                
                 ventanaInicio.jTable2.changeSelection(i, 1, false, false);
             }
         }
@@ -753,6 +760,19 @@ public class VentanaInicio extends javax.swing.JFrame {
         //mapaFondo.casillasMapa[posMapaX][posMapaY].setBackground(Color.CYAN);
         mapaPJs.casillasMapa[posMapaX][posMapaY].setBorder(border);
         
+        //Centramos el Mapa en el PJ seleccionado
+        //Rectangle bounds = jScrollMapa.getViewport().getViewRect(); //Este es el tamaño de la parte que se ve...
+        //Dimension tamaño = jScrollMapa.getViewport().getViewSize(); //Este es el tamaño total, de lo que se ve y del resto
+        //System.out.println("BOUNDS: " + bounds);
+        //System.out.println("Tamaño: " + tamaño);
+        //int centradoX = (tamaño.width - bounds.width/2);
+        //int centradoY = (tamaño.height - bounds.height);
+        //Como sabemos las coordenadas del PJ, lo centramos en las coordenadas
+        jScrollMapa.getViewport().setViewPosition(new Point(coordenadaX*32, coordenadaY*32));
+        //jScrollMapa.getViewport().setViewSize(tamaño);
+        
+        
+        
         
     }//GEN-LAST:event_jTable2MousePressed
 
@@ -849,12 +869,6 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JSeparator separador1;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-    
-    
-    
-    
     
     
     public void mostrarPJs() {

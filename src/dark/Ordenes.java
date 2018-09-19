@@ -6,6 +6,7 @@
 package dark;
 
 import static dark.Dark.ventanaInicio;
+import java.awt.Color;
 import javax.swing.JComboBox;
 
 /**
@@ -27,6 +28,7 @@ public class Ordenes extends javax.swing.JPanel {
     //Variable que almacena el codigo del mapa con las posibles salidas de movimiento
     int codPJ;
     
+    SubOrdenes subOrden;
     /**
      * Creates new form Ordenes
      */
@@ -40,6 +42,7 @@ public class Ordenes extends javax.swing.JPanel {
         //this.jPestania1.add(mover);
         //System.out.println("ES VISIBLE? "+mover.isVisible());
         
+        subOrden = new SubOrdenes();
         
         //mover.setVisible(false);
         //mover.setEnabled(false);
@@ -370,6 +373,7 @@ public class Ordenes extends javax.swing.JPanel {
     private void jButtonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar1ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox1.setEnabled(true);
+        jComboBox1_1.setEnabled(true);
         //Ponemos los botones en orden
         jButtonOrdenar1.setEnabled(true);
         jButtonCancelar1.setEnabled(false);
@@ -394,20 +398,38 @@ public class Ordenes extends javax.swing.JPanel {
     private void jButtonOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenar1ActionPerformed
         //desactivamos la acción, se queda como marcada...
         jComboBox1.setEnabled(false);
+        jComboBox1_1.setEnabled(false);
         //Guardamos la acción seleccionada en el combobox
         int idAccion = Dark.ventanaInicio.ordenes.jComboBox1.getSelectedIndex();
         //Guardamos la acción en el ArrayList de las acciones
         int posicion = Dark.ventanaInicio.PJ;
-        System.out.println("Posicion para List: " + posicion);
         //Guardamos la orden
         EnviarOrdenes orden1; //Creamos una instancia
         //Recuperamos los valores de las ordenes de ese PJ
         orden1 = Dark.ventanaInicio.ordenesPJ.get(posicion);
         //Asignamos el nuevo valor de la accion selecciona en el objeto
         orden1.accion1 = idAccion;
-        System.out.println("Orden para List: " + orden1.accion1);
+        //System.out.println("Orden para List: " + orden1.accion1);
         //Almacenamos el objeto en el ArrayList
         Dark.ventanaInicio.ordenesPJ.set(posicion, orden1);
+        //Almacenamos la suborden. Aquí tenemos que ver la orden, en funcion de esta irán unos parámetros u otros
+        System.out.println("SE HA GUARDADO EN LA CLASE===: " + orden1.accion1);
+        switch(orden1.accion1) {
+            case 0: //El PJ se va a mover
+                String casilla = jComboBox1_1.getItemAt(jComboBox1_1.getSelectedIndex()); //Guardamos las casillas
+                String[] partes = casilla.split("-"); //Dividimos el String para obtener la X y la Y
+                String parte1 = partes[0]; 
+                String parte2 = partes[1];    
+                subOrden.setCasillaX(Integer.valueOf(parte1)); //Indicamos la posición a la que se mueve
+                subOrden.setCasillaY(Integer.valueOf(parte2)); //Guardando la X y la Y en la clase
+                subOrden.setIdPJ(codPJ); //Guardamos siempre el ID del PJ
+                subOrden.setAccion(idAccion); //Y guardamos también la acción
+                
+                Dark.ventanaInicio.subOrdenes.add(subOrden); //Y ahora metemos el objeto en su ArrayList correspondiente
+                
+                break; //Se dejan en blanco los campos no necesarios
+        }
+        System.out.println("SE HA GUARDADO EN LA CLASE: " + Dark.ventanaInicio.subOrdenes.get(0));
         //Ponemos los botones en orden
         jButtonOrdenar1.setEnabled(false);
         jButtonCancelar1.setEnabled(true);
@@ -498,7 +520,20 @@ public class Ordenes extends javax.swing.JPanel {
         System.out.println("MUESTRA CODPJ: " + codPJ);
         System.out.println("Primeras coordenadas: " + posPJx + ":::" + posPJy);
         //moverADireccion(Constantes.mapaConCaminos[posPJx][posPJy], 0, posPJx, posPJy);
+        Dark.ventanaInicio.mapaFondo.limpiarMapa();
         switch(codPJ) {
+            case 1:
+                irNorte(codPJ, movi, posPJx, posPJy);
+                break;
+            case 2:
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 3:
+                irSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 4:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                break;
             case 5:
                 irNorte(codPJ, movi, posPJx, posPJy);
                 irEste(codPJ, movi, posPJx, posPJy);
@@ -523,6 +558,26 @@ public class Ordenes extends javax.swing.JPanel {
                 irOeste(codPJ, movi, posPJx, posPJy);
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
+            case 11:
+                irNorte(codPJ, movi, posPJx, posPJy);
+                irSur(codPJ, movi, posPJx, posPJy);
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 12:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                irSur(codPJ, movi, posPJx, posPJy);
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 13:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                irNorte(codPJ, movi, posPJx, posPJy);
+                irSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 14:
+                irOeste(codPJ, movi, posPJx, posPJy);
+                irNorte(codPJ, movi, posPJx, posPJy);
+                irEste(codPJ, movi, posPJx, posPJy);
+                break;
         }
         
     }
@@ -532,6 +587,7 @@ public class Ordenes extends javax.swing.JPanel {
         int nuevaY = pY;
         if(casillas > 0) { //Preguntamos si quedan movimientos
             jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al oeste, la casilla que podemos encontrar será código: 5-8-9-11-12-14
@@ -565,6 +621,7 @@ public class Ordenes extends javax.swing.JPanel {
         int nuevaY = pY;
         if(casillas > 0) { //Preguntamos si quedan movimientos
             jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al este, la casilla que podemos encontrar será código: 7-9-10-12-13-14
@@ -598,6 +655,7 @@ public class Ordenes extends javax.swing.JPanel {
         int nuevaY = pY-1;
         if(casillas > 0) { //Preguntamos si quedan movimientos
             jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al norte, la casilla que podemos encontrar será código: 6-8-10-11-12-13
@@ -631,6 +689,7 @@ public class Ordenes extends javax.swing.JPanel {
         int nuevaY = pY+1;
         if(casillas > 0) { //Preguntamos si quedan movimientos
             jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al sur, la casilla que podemos encontrar será código: 5-6-7-11-13-14
