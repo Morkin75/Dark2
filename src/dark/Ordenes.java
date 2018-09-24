@@ -44,9 +44,6 @@ public class Ordenes extends javax.swing.JPanel {
         
         subOrden = new SubOrdenes();
         
-        //mover.setVisible(false);
-        //mover.setEnabled(false);
-        //this.add(mover, 0);
         
         //System.out.println("POSICION: " + this.getComponentZOrder(jPestania4));
         
@@ -123,7 +120,6 @@ public class Ordenes extends javax.swing.JPanel {
 
         jComboBox1_1.setEnabled(false);
         jComboBox1_1.setMinimumSize(new java.awt.Dimension(100, 27));
-        jComboBox1_1.setSize(new java.awt.Dimension(200, 0));
 
         javax.swing.GroupLayout jPestania1Layout = new javax.swing.GroupLayout(jPestania1);
         jPestania1.setLayout(jPestania1Layout);
@@ -133,7 +129,7 @@ public class Ordenes extends javax.swing.JPanel {
                 .addGroup(jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPestania1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonOrdenar1))
@@ -144,7 +140,7 @@ public class Ordenes extends javax.swing.JPanel {
                         .addGroup(jPestania1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, 0, 284, Short.MAX_VALUE)
                             .addGroup(jPestania1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -429,7 +425,7 @@ public class Ordenes extends javax.swing.JPanel {
                 
                 break; //Se dejan en blanco los campos no necesarios
         }
-        System.out.println("SE HA GUARDADO EN LA CLASE: " + Dark.ventanaInicio.subOrdenes.get(0));
+        System.out.println("SE HA GUARDADO EN LA CLASE: " + Dark.ventanaInicio.subOrdenes.get(0).getCasillaX());
         //Ponemos los botones en orden
         jButtonOrdenar1.setEnabled(false);
         jButtonCancelar1.setEnabled(true);
