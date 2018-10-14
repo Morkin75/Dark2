@@ -409,13 +409,17 @@ public class Ordenes extends javax.swing.JPanel {
         //Almacenamos el objeto en el ArrayList
         Dark.ventanaInicio.ordenesPJ.set(posicion, orden1);
         //Almacenamos la suborden. Aquí tenemos que ver la orden, en funcion de esta irán unos parámetros u otros
-        System.out.println("SE HA GUARDADO EN LA CLASE===: " + orden1.accion1);
+        System.out.println("SE HA GUARDADO EN LA CLASE LA ACCION: " + orden1.accion1);
+        String casilla = "";
+        String[] partes;
+        String parte1 = "";
+        String parte2 = "";
         switch(orden1.accion1) {
             case 0: //El PJ se va a mover
-                String casilla = jComboBox1_1.getItemAt(jComboBox1_1.getSelectedIndex()); //Guardamos las casillas
-                String[] partes = casilla.split("-"); //Dividimos el String para obtener la X y la Y
-                String parte1 = partes[0]; 
-                String parte2 = partes[1];    
+                casilla = jComboBox1_1.getItemAt(jComboBox1_1.getSelectedIndex()); //Guardamos las casillas
+                partes = casilla.split("-"); //Dividimos el String para obtener la X y la Y
+                parte1 = partes[0]; 
+                parte2 = partes[1];    
                 subOrden.setCasillaX(Integer.valueOf(parte1)); //Indicamos la posición a la que se mueve
                 subOrden.setCasillaY(Integer.valueOf(parte2)); //Guardando la X y la Y en la clase
                 subOrden.setIdPJ(codPJ); //Guardamos siempre el ID del PJ
@@ -423,9 +427,27 @@ public class Ordenes extends javax.swing.JPanel {
                 
                 Dark.ventanaInicio.subOrdenes.add(subOrden); //Y ahora metemos el objeto en su ArrayList correspondiente
                 
+                System.out.println("SE HA GUARDADO EN LA CLASE la Coordenada X: " + Dark.ventanaInicio.subOrdenes.get(0).getCasillaX());
+                System.out.println("SE HA GUARDADO EN LA CLASE la Coordenada Y: " + Dark.ventanaInicio.subOrdenes.get(0).getCasillaY());
+                
                 break; //Se dejan en blanco los campos no necesarios
+            case 1: //El PJ va a seguir a alguien
+                //casilla = jComboBox1_1.getItemAt(jComboBox1_1.getSelectedIndex()); //Guardamos las casillas
+                //partes = casilla.split("-"); //Dividimos el String para obtener la X y la Y
+                //parte1 = partes[0]; 
+                //parte2 = partes[1];    
+                //subOrden.setCasillaX(Integer.valueOf(parte1)); //Indicamos la posición a la que se mueve
+                //subOrden.setCasillaY(Integer.valueOf(parte2)); //Guardando la X y la Y en la clase
+                subOrden.setIdPJ(codPJ); //Guardamos siempre el ID del PJ
+                subOrden.setAccion(idAccion); //Y guardamos también la acción
+                
+                Dark.ventanaInicio.subOrdenes.add(subOrden); //Y ahora metemos el objeto en su ArrayList correspondiente
+                
+                break; //Se dejan en blanco los campos no necesarios
+            default:
+                break;
         }
-        System.out.println("SE HA GUARDADO EN LA CLASE: " + Dark.ventanaInicio.subOrdenes.get(0).getCasillaX());
+        
         //Ponemos los botones en orden
         jButtonOrdenar1.setEnabled(false);
         jButtonCancelar1.setEnabled(true);

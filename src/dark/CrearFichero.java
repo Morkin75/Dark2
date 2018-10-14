@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,19 +22,29 @@ public class CrearFichero implements Serializable {
     
     static void guardarArrayList(ArrayList<SubOrdenes> ordenes) {
         
-        String fichero = "ordenes.dat";
+        String fichero = "../ordenes.dat";
+        ObjectOutputStream ficheroSalida = null;
         
         try {
-            ObjectOutputStream ficheroSalida = new ObjectOutputStream(new FileOutputStream(fichero));
+           
+            ficheroSalida = new ObjectOutputStream(new FileOutputStream(fichero));
             ficheroSalida.writeObject(ordenes);
             ficheroSalida.flush();
-            ficheroSalida.close();
+            //ficheroSalida.close();
             System.out.println("Órdenes guardas correctamente... ");
         } catch (FileNotFoundException fnfe) {
-            System.out.println("El archivo no existe: " + fnfe);
+            System.out.println("El archivo no existe E1: " + fnfe);
         } catch (IOException ioe) {
-            System.out.println("El archivo no existe: " + ioe);
+            System.out.println("El archivo no existe E2: " + ioe);
+        } 
+        
+        try {
+            ficheroSalida.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CrearFichero.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
     
 }

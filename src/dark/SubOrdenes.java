@@ -13,8 +13,8 @@ public class SubOrdenes {
     
     private int idPJ = 0;
     private int accion = 0;
-    private int casillaX = 0;
-    private int casillaY = 0;
+    private int casillaX = 0; //Coordenada X de la casilla donde se va a mover el PJ
+    private int casillaY = 0; //Coordenada Y de la casilla donde se va a mover el PJ
     private String enemigo = "";
     private String objeto = "";
     private String bando = "";
