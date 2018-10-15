@@ -34,6 +34,7 @@ public class Ordenes extends javax.swing.JPanel {
     
     //ArrayList que almacena la ruta
     public ArrayList<String> ruta = new ArrayList<>();
+    public ArrayList<String> ruta2 = new ArrayList<>();
     
     boolean rutaCalculada;
     
@@ -54,6 +55,8 @@ public class Ordenes extends javax.swing.JPanel {
         subOrden = new SubOrdenes();
         rutaCalculada = true;
         
+        ruta.clear();
+        ruta2.clear();
         
         //System.out.println("POSICION: " + this.getComponentZOrder(jPestania4));
         
@@ -444,10 +447,11 @@ public class Ordenes extends javax.swing.JPanel {
                 System.out.println("SE HA GUARDADO EN LA CLASE la Coordenada Y: " + posPJyFinal);
                 
                 //Calculamos la ruta
-                ruta.clear();
-                calcularRuta();
-                for(int h=0; h<ruta.size(); h++)
-                    System.out.println(ruta.get(h));
+                //ruta.clear();
+                //calcularRuta();
+                calcularRuta2(Integer.valueOf(parte1), Integer.valueOf(parte2), codPJ);
+                for(int h=0; h<ruta2.size(); h++)
+                    System.out.println(ruta2.get(h));
                 
                 break; //Se dejan en blanco los campos no necesarios
             case 1: //El PJ va a seguir a alguien
@@ -558,61 +562,90 @@ public class Ordenes extends javax.swing.JPanel {
         System.out.println("Primeras coordenadas: " + posPJx + ":::" + posPJy);
         //moverADireccion(Constantes.mapaConCaminos[posPJx][posPJy], 0, posPJx, posPJy);
         Dark.ventanaInicio.mapaFondo.limpiarMapa();
+        ruta.clear();
         switch(codPJ) {
             case 1:
+                ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
                 break;
             case 2:
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 3:
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 4:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
                 break;
             case 5:
+                ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 6:
+                ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 7:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                irNorte(codPJ, movi, posPJx, posPJy);
+                ruta.add("Norte");
+                irNorte(codPJ, movi, posPJx, posPJy);                
                 break;
             case 8:
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 9:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 10:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 11:
+                ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 12:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 13:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
+                ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
+                ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 14:
+                ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
+                ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
+                ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
         }
@@ -629,28 +662,39 @@ public class Ordenes extends javax.swing.JPanel {
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al oeste, la casilla que podemos encontrar será código: 5-8-9-11-12-14
                 case 5: //De este a Norte
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 8: //De este a sur
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 9: //De este a oeste
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 11: //De este a Norte y Sur
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 12: //De este a Oeste y sur
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 14: //De este a Oeste y Norte
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
             }
             
+        } else {
+            ruta.add("--------");
         }
     }
     public void irEste(int codigo, int casillas, int pX, int pY) {
@@ -663,28 +707,39 @@ public class Ordenes extends javax.swing.JPanel {
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al este, la casilla que podemos encontrar será código: 7-9-10-12-13-14
                 case 7: //De Oeste a Norte
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 9: //De Oeste a Este
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 10: //De Oeste a Sur
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 12: //De oeste a Sur y Este
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 13: //De oeste a norte y sur
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 14: //De oeste a norte y este
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
             }
             
+        } else {
+            ruta.add("--------");
         }
     }
     public void irNorte(int codigo, int casillas, int pX, int pY) {
@@ -697,28 +752,39 @@ public class Ordenes extends javax.swing.JPanel {
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al norte, la casilla que podemos encontrar será código: 6-8-10-11-12-13
                 case 6: //De norte a sur
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 8: //De norte a este
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 10: //De norte a oeste
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 11: //De norte a este y sur
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 12: //De norte a este y oeste
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 13: //De norte a oeste y sur
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Norte");
                     irNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
             }
             
+        } else {
+            ruta.add("--------");
         }
     }
     public void irSur(int codigo, int casillas, int pX, int pY) {
@@ -731,28 +797,39 @@ public class Ordenes extends javax.swing.JPanel {
             int nuevasCasillas = casillas -1;
             switch (nuevocodPJ) { //Si vamos al sur, la casilla que podemos encontrar será código: 5-6-7-11-13-14
                 case 5: //De sur a este
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 6: //De sur a norte
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 7: //De sur a oeste
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 11: //De sur a este y norte
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 13: //De sur a oeste y norte
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Sur");
                     irSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
                 case 14: //De sur a este y oeste
+                    ruta.add("Oeste");
                     irOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
+                    ruta.add("Este");
                     irEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
                     break;
             }
             
+        } else {
+            ruta.add("--------");
         }
     }
     
@@ -1069,6 +1146,24 @@ public class Ordenes extends javax.swing.JPanel {
                 //ruta.remove(ruta.size()-1);
             }
             
+        }
+    }
+
+    public void calcularRuta2(int xDest, int yDest, int codCasilla) {
+        //Posiciones del PJ escogido - Vemos en el ArrayList la posición del PJ
+        posPJx = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosX();
+        posPJy = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosY();
+        //Guardamos el movimiento en una variable para tener un acceso más rápido
+        movi = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getMov();
+        
+        int movX = xDest - posPJx;
+        int movY = yDest - posPJy;
+        
+        if(movX==0) { //No hay movimiento horizontal 
+            System.out.println("X VALE 0");
+            for(int x=0; x<movi; x++) {
+                ruta2.add("Norte");
+            }
         }
     }
 
