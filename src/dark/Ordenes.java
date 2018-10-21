@@ -565,11 +565,11 @@ public class Ordenes extends javax.swing.JPanel {
         ruta.clear();
         switch(codPJ) {
             case 1:
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
                 break;
             case 2:
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 3:
@@ -577,75 +577,75 @@ public class Ordenes extends javax.swing.JPanel {
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 4:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
                 break;
             case 5:
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 6:
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
-                ruta.add("Sur");
+                //ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 7:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);                
                 break;
             case 8:
-                ruta.add("Sur");
+                //ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 9:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 10:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                ruta.add("Sur");
+                //ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 11:
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
-                ruta.add("Sur");
+                //ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 12:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                ruta.add("Sur");
+                //ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
             case 13:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
-                ruta.add("Sur");
+                //ruta.add("Sur");
                 irSur(codPJ, movi, posPJx, posPJy);
                 break;
             case 14:
-                ruta.add("Oeste");
+                //ruta.add("Oeste");
                 irOeste(codPJ, movi, posPJx, posPJy);
-                ruta.add("Norte");
+                //ruta.add("Norte");
                 irNorte(codPJ, movi, posPJx, posPJy);
-                ruta.add("Este");
+                //ruta.add("Este");
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
         }
@@ -694,7 +694,7 @@ public class Ordenes extends javax.swing.JPanel {
             }
             
         } else {
-            ruta.add("--------");
+            //ruta.add("--------");
         }
     }
     public void irEste(int codigo, int casillas, int pX, int pY) {
@@ -739,7 +739,7 @@ public class Ordenes extends javax.swing.JPanel {
             }
             
         } else {
-            ruta.add("--------");
+            //ruta.add("--------");
         }
     }
     public void irNorte(int codigo, int casillas, int pX, int pY) {
@@ -784,7 +784,7 @@ public class Ordenes extends javax.swing.JPanel {
             }
             
         } else {
-            ruta.add("--------");
+            //ruta.add("--------");
         }
     }
     public void irSur(int codigo, int casillas, int pX, int pY) {
@@ -829,7 +829,7 @@ public class Ordenes extends javax.swing.JPanel {
             }
             
         } else {
-            ruta.add("--------");
+            //ruta.add("--------");
         }
     }
     
@@ -1041,10 +1041,13 @@ public class Ordenes extends javax.swing.JPanel {
     public void irRutaNorte(int codigo, int casillas, int pX, int pY) {
         int nuevaX = pX;
         int nuevaY = pY-1;
-        if(ruta.size()==2 && casillas==movi && !rutaCalculada) { ruta.clear(); System.out.println("¿PASA N?");}
-        if(ruta.size()==2 && casillas==movi-1 && !rutaCalculada) { ruta.remove(ruta.size()-1); }
-        //if(ruta.size()==2 && casillas==movi-2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1);}
-        System.out.println("Tamaño de lista N: " + ruta.size() + " CAS: " + casillas + rutaCalculada);
+        if(!rutaCalculada) { //Si la ruta no está calculada
+            ruta2.add("Norte");
+            if(posPJx == nuevaX && posPJy == nuevaY) { //Hemos encontrado la ruta
+                rutaCalculada = true;
+            } 
+        }
+        System.out.println("Tamaño de lista N: " + ruta2.size() + " CAS: " + casillas + rutaCalculada);
         if(casillas > 0) { //Preguntamos si quedan movimientos
             
             if(!rutaCalculada)
@@ -1156,7 +1159,66 @@ public class Ordenes extends javax.swing.JPanel {
         //Guardamos el movimiento en una variable para tener un acceso más rápido
         movi = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getMov();
         
-        int movX = xDest - posPJx;
+        rutaCalculada = false;
+        switch(codCasilla) {
+            case 1:
+                //irRutaNorte(codPJ, movi, posPJx, posPJy);
+                break;
+            case 2:
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 3:
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 4:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 5:
+                //irRutaNorte(codPJ, movi, posPJx, posPJy);
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 6:
+                if(!rutaCalculada) irRutaNorte(codPJ, movi, posPJx, posPJy);
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 7:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                //irRutaNorte(codPJ, movi, posPJx, posPJy);
+                break;
+            case 8:
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 9:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 10:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 11:
+                //irRutaNorte(codPJ, movi, posPJx, posPJy);
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 12:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+            case 13:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                //irRutaNorte(codPJ, movi, posPJx, posPJy);
+                //irRutaSur(codPJ, movi, posPJx, posPJy);
+                break;
+            case 14:
+                //irRutaOeste(codPJ, movi, posPJx, posPJy);
+                //irRutaNorte(codPJ, movi, posPJx, posPJy);
+                //irRutaEste(codPJ, movi, posPJx, posPJy);
+                break;
+        
+        /*int movX = xDest - posPJx;
         int movY = yDest - posPJy;
         
         if(movX==0) { //No hay movimiento horizontal 
@@ -1164,8 +1226,9 @@ public class Ordenes extends javax.swing.JPanel {
             for(int x=0; x<movi; x++) {
                 ruta2.add("Norte");
             }
+        }*/
         }
-    }
 
+    }
 }
 
