@@ -36,6 +36,10 @@ public class Ordenes extends javax.swing.JPanel {
     public ArrayList<String> ruta = new ArrayList<>();
     public ArrayList<String> ruta2 = new ArrayList<>();
     
+    public ArrayList<Integer> casillasMovidas = new ArrayList<>();
+    
+    public ArrayList<ArrayList<String>> rutas = new ArrayList<>();
+    
     boolean rutaCalculada;
     
     SubOrdenes subOrden;
@@ -57,6 +61,8 @@ public class Ordenes extends javax.swing.JPanel {
         
         ruta.clear();
         ruta2.clear();
+        rutas.clear();
+        casillasMovidas.clear();
         
         //System.out.println("POSICION: " + this.getComponentZOrder(jPestania4));
         
@@ -133,6 +139,11 @@ public class Ordenes extends javax.swing.JPanel {
 
         jComboBox1_1.setEnabled(false);
         jComboBox1_1.setMinimumSize(new java.awt.Dimension(100, 27));
+        jComboBox1_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1_1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPestania1Layout = new javax.swing.GroupLayout(jPestania1);
         jPestania1.setLayout(jPestania1Layout);
@@ -386,6 +397,8 @@ public class Ordenes extends javax.swing.JPanel {
         //Ponemos los botones en orden
         jButtonOrdenar1.setEnabled(true);
         jButtonCancelar1.setEnabled(false);
+        ruta2.clear();
+        rutas.clear();
     }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
@@ -448,10 +461,11 @@ public class Ordenes extends javax.swing.JPanel {
                 
                 //Calculamos la ruta
                 //ruta.clear();
+                calculaRuta();
                 //calcularRuta();
-                calcularRuta2(Integer.valueOf(parte1), Integer.valueOf(parte2), codPJ);
-                for(int h=0; h<ruta2.size(); h++)
-                    System.out.println(ruta2.get(h));
+                //calcularRuta2(Integer.valueOf(parte1), Integer.valueOf(parte2), codPJ);
+                for(int h=0; h<rutas.size(); h++)
+                    System.out.println(rutas.get(h));
                 
                 break; //Se dejan en blanco los campos no necesarios
             case 1: //El PJ va a seguir a alguien
@@ -481,6 +495,8 @@ public class Ordenes extends javax.swing.JPanel {
         if(jComboBox1.getSelectedIndex() == 0) {
             ventanaInicio.ordenes.jComboBox1_1.setVisible(true);
             ventanaInicio.ordenes.jComboBox1_1.setEnabled(true);
+            //Eliminamos los datos anteriores
+            jComboBox1_1.removeAllItems();
             cargarMenuEscogerLugar();
         } else {           
             ventanaInicio.ordenes.jComboBox1_1.setVisible(false);
@@ -488,6 +504,10 @@ public class Ordenes extends javax.swing.JPanel {
             cargarMenuEscogerEnemigo();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1_1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -538,8 +558,7 @@ public class Ordenes extends javax.swing.JPanel {
         //Posiciones del PJ escogido - Vemos en el ArrayList la posición del PJ
         posPJx = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosX();
         posPJy = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosY();
-        //Eliminamos los datos anteriores
-        jComboBox1_1.removeAllItems();
+        
         //jComboBoxElegirCoor.setLocation(new java.awt.Point(150, 80));
         //Guardamos el movimiento en una variable para tener un acceso más rápido
         movi = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getMov();
@@ -649,6 +668,10 @@ public class Ordenes extends javax.swing.JPanel {
                 irEste(codPJ, movi, posPJx, posPJy);
                 break;
         }
+        //Una vez calculadas las casillas, calculamos las rutas
+        //calcularRuta("Norte", ruta2.size(), casillas, nuevaX, nuevaY, nuevocodPJ);
+        
+        //calculaRuta();
         
     }
     
@@ -657,9 +680,11 @@ public class Ordenes extends javax.swing.JPanel {
         int nuevaY = pY;
         if(casillas > 0) { //Preguntamos si quedan movimientos
             jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
+            
             Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
+            casillasMovidas.add(movi - casillas); //Así sabemos cuantas casillas se mueven
             switch (nuevocodPJ) { //Si vamos al oeste, la casilla que podemos encontrar será código: 5-8-9-11-12-14
                 case 5: //De este a Norte
                     ruta.add("Norte");
@@ -705,6 +730,7 @@ public class Ordenes extends javax.swing.JPanel {
             Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
+            casillasMovidas.add(movi - casillas); //Así sabemos cuantas casillas se mueven
             switch (nuevocodPJ) { //Si vamos al este, la casilla que podemos encontrar será código: 7-9-10-12-13-14
                 case 7: //De Oeste a Norte
                     ruta.add("Norte");
@@ -750,6 +776,7 @@ public class Ordenes extends javax.swing.JPanel {
             Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
+            casillasMovidas.add(movi - casillas); //Así sabemos cuantas casillas se mueven
             switch (nuevocodPJ) { //Si vamos al norte, la casilla que podemos encontrar será código: 6-8-10-11-12-13
                 case 6: //De norte a sur
                     ruta.add("Norte");
@@ -784,7 +811,7 @@ public class Ordenes extends javax.swing.JPanel {
             }
             
         } else {
-            //ruta.add("--------");
+            //rutas.add(ruta);
         }
     }
     public void irSur(int codigo, int casillas, int pX, int pY) {
@@ -795,6 +822,7 @@ public class Ordenes extends javax.swing.JPanel {
             Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
             int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
             int nuevasCasillas = casillas -1;
+            casillasMovidas.add(movi - casillas); //Así sabemos cuantas casillas se mueven
             switch (nuevocodPJ) { //Si vamos al sur, la casilla que podemos encontrar será código: 5-6-7-11-13-14
                 case 5: //De sur a este
                     ruta.add("Este");
@@ -853,382 +881,35 @@ public class Ordenes extends javax.swing.JPanel {
             
         }
     }
-    
-    public void calcularRuta() {
-        //Posiciones del PJ escogido - Vemos en el ArrayList la posición del PJ
-        posPJx = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosX();
-        posPJy = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosY();
-        //Guardamos el movimiento en una variable para tener un acceso más rápido
-        movi = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getMov();
-        codPJ = Constantes.mapaConCaminos[posPJx][posPJy];
-        //Vamos a prescindir del bucle. Preguntamos por el código de la casilla del PJ
-        //System.out.println("MUESTRA CODPJ: " + codPJ);
-        //System.out.println("Primeras coordenadas: " + posPJx + ":::" + posPJy);
-        //moverADireccion(Constantes.mapaConCaminos[posPJx][posPJy], 0, posPJx, posPJy);
-        Dark.ventanaInicio.mapaFondo.limpiarMapa();
-        rutaCalculada = false;
-        switch(codPJ) {
-            case 1:
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                break;
-            case 2:
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 3:
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 4:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 5:
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 6:
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 7:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                break;
-            case 8:
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 9:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 10:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 11:
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 12:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 13:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 14:
-                irRutaOeste(codPJ, movi, posPJx, posPJy);
-                irRutaNorte(codPJ, movi, posPJx, posPJy);
-                irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-        }
-        
-    }
-    
-    public void irRutaOeste(int codigo, int casillas, int pX, int pY) {
-        int nuevaX = pX-1;
-        int nuevaY = pY;
-        if(ruta.size()==2 && casillas==movi && !rutaCalculada) { ruta.clear(); System.out.println("¿PASA O?");}
-        if(ruta.size()==2 && casillas==movi-1 && !rutaCalculada) { ruta.remove(ruta.size()-1); }
-        //if(ruta.size()==2 && casillas==movi-2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1);}
-        System.out.println("Tamaño de lista O: " + ruta.size() + " CAS: " + casillas + rutaCalculada);
-        if(casillas > 0) { //Preguntamos si quedan movimientos
-            
-            if(!rutaCalculada)
-                ruta.add("Oeste");
-            if(nuevaX == posPJxFinal && nuevaY == posPJyFinal) 
-                rutaCalculada = true;
-            
-            
-            if(ruta.size()==movi && casillas==2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1); }
-            //if(ruta.size()==3 && casillas==2 && rutaCalculada) { ruta.remove(0); }
-            if(ruta.size()==movi && casillas==1 && !rutaCalculada) { ruta.remove(ruta.size()-1);}
-            //if(ruta.size()==3 && casillas==1 && rutaCalculada) { ruta.remove(0); ruta.remove(0); }
-            //if(ruta.size()==3 && !rutaCalculada) ruta.clear();
-            //jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
-            //Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
-            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
-            int nuevasCasillas = casillas -1;
-            if(!rutaCalculada) {
-                switch (nuevocodPJ) { //Si vamos al oeste, la casilla que podemos encontrar será código: 5-8-9-11-12-14
-                    case 5: //De este a Norte
-                        irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        break;
-                    case 8: //De este a sur
-                        irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        break;
-                    case 9: //De este a oeste
-                        irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        break;
-                    case 11: //De este a Norte y Sur
-                        irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        break;
-                    case 12: //De este a Oeste y sur
-                        irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        break;
-                    case 14: //De este a Oeste y Norte
-                        irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                        break;
-                } 
-            } else {
-                //ruta.remove(ruta.size()-1);
-            }
-        }
-            
-    }
-    
-    public void irRutaEste(int codigo, int casillas, int pX, int pY) {
-        int nuevaX = pX+1;
-        int nuevaY = pY;
-        if(ruta.size()==2 && casillas==movi && !rutaCalculada) { ruta.clear(); System.out.println("¿PASA E?");}
-        if(ruta.size()==2 && casillas==movi-1 && !rutaCalculada) { ruta.remove(ruta.size()-1); }
-        //if(ruta.size()==2 && casillas==movi-2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1);}
-        System.out.println("Tamaño de lista E: " + ruta.size() + " CAS: " + casillas + rutaCalculada);
-        if(casillas > 0) { //Preguntamos si quedan movimientos
-            
-            if(!rutaCalculada)
-                ruta.add("Este");
-            if(nuevaX == posPJxFinal && nuevaY == posPJyFinal) 
-                rutaCalculada = true;
-            
-            
-            if(ruta.size()==movi && casillas==2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1); }
-            //if(ruta.size()==3 && casillas==2 && rutaCalculada) { ruta.remove(0); }
-            if(ruta.size()==movi && casillas==1 && !rutaCalculada) { ruta.remove(ruta.size()-1);}
-            //if(ruta.size()==3 && casillas==1 && rutaCalculada) { ruta.remove(0); ruta.remove(0); }
-            //if(ruta.size()==3 && !rutaCalculada) ruta.clear();
-            //jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
-            //Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
-            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
-            int nuevasCasillas = casillas -1;
-            if(!rutaCalculada) {
-            switch (nuevocodPJ) { //Si vamos al este, la casilla que podemos encontrar será código: 7-9-10-12-13-14
-                case 7: //De Oeste a Norte
-                    irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 9: //De Oeste a Este
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 10: //De Oeste a Sur
-                    irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 12: //De oeste a Sur y Este
-                    irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 13: //De oeste a norte y sur
-                    irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 14: //De oeste a norte y este
-                    irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-            }
-            } else {
-                //ruta.clear();
-                //ruta.remove(ruta.size()-1);
-            }
-            
-        }
-    }
-    public void irRutaNorte(int codigo, int casillas, int pX, int pY) {
-        int nuevaX = pX;
-        int nuevaY = pY-1;
-        if(!rutaCalculada) { //Si la ruta no está calculada
-            ruta2.add("Norte");
-            if(posPJx == nuevaX && posPJy == nuevaY) { //Hemos encontrado la ruta
-                rutaCalculada = true;
-            } 
-        }
-        System.out.println("Tamaño de lista N: " + ruta2.size() + " CAS: " + casillas + rutaCalculada);
-        if(casillas > 0) { //Preguntamos si quedan movimientos
-            
-            if(!rutaCalculada)
-                ruta.add("Norte");
-            if(nuevaX == posPJxFinal && nuevaY == posPJyFinal) 
-                rutaCalculada = true;
-            
-            
-            if(ruta.size()==movi && casillas==2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1); }
-            //if(ruta.size()==3 && casillas==2 && rutaCalculada) { ruta.remove(0); }
-            if(ruta.size()==movi && casillas==1 && !rutaCalculada) { ruta.remove(ruta.size()-1);}
-            //if(ruta.size()==3 && casillas==1 && rutaCalculada) { ruta.remove(0); ruta.remove(0); }
-            //if(ruta.size()==3 && !rutaCalculada) ruta.clear();
-            //jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
-            //Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
-            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
-            int nuevasCasillas = casillas -1;
-            if(!rutaCalculada) {
-            switch (nuevocodPJ) { //Si vamos al norte, la casilla que podemos encontrar será código: 6-8-10-11-12-13
-                case 6: //De norte a sur
-                    irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 8: //De norte a este
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 10: //De norte a oeste
-                    irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 11: //De norte a este y sur
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 12: //De norte a este y oeste
-                    irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 13: //De norte a oeste y sur
-                    irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaNorte(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-            }
-            } else {
-                //ruta.clear();
-                //ruta.remove(ruta.size()-1);
-            }
-            
-        }
-    }
-    public void irRutaSur(int codigo, int casillas, int pX, int pY) {
-        int nuevaX = pX;
-        int nuevaY = pY+1;
-        if(ruta.size()==2 && casillas==movi && !rutaCalculada) { ruta.clear(); System.out.println("¿PASA S?");}
-        if(ruta.size()==2 && casillas==movi-1 && !rutaCalculada) { ruta.remove(ruta.size()-1); }
-        //if(ruta.size()==2 && casillas==movi-2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1);}
-        System.out.println("Tamaño de lista S: " + ruta.size() + " CAS: " + casillas + rutaCalculada);
-        if(casillas > 0) { //Preguntamos si quedan movimientos
-            
-            if(!rutaCalculada)
-                ruta.add("Sur");
-            if(nuevaX == posPJxFinal && nuevaY == posPJyFinal) 
-                rutaCalculada = true;
-            
-            
-            if(ruta.size()==movi && casillas==2 && !rutaCalculada) { ruta.remove(ruta.size()-1); ruta.remove(ruta.size()-1); }
-            //if(ruta.size()==3 && casillas==2 && rutaCalculada) { ruta.remove(0); }
-            if(ruta.size()==movi && casillas==1 && !rutaCalculada) { ruta.remove(ruta.size()-1);}
-            //if(ruta.size()==3 && casillas==1 && rutaCalculada) { ruta.remove(0); ruta.remove(0); }
-            //if(ruta.size()==3 && !rutaCalculada) ruta.clear();
-            //jComboBox1_1.addItem((String) (nuevaX + "-" + nuevaY)); //Añadimos la casilla al combo
-            //Dark.ventanaInicio.mapaFondo.rellenaRuta(nuevaX, nuevaY); //Hacemos que la casilla en el mapa quede resaltada
-            int nuevocodPJ = Constantes.mapaConCaminos[nuevaX][nuevaY]; //Añadimos el código de la nueva casilla
-            int nuevasCasillas = casillas -1;
-            if(!rutaCalculada) {
-            switch (nuevocodPJ) { //Si vamos al sur, la casilla que podemos encontrar será código: 5-6-7-11-13-14
-                case 5: //De sur a este
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 6: //De sur a norte
-                    irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 7: //De sur a oeste
-                    irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 11: //De sur a este y norte
-                    irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 13: //De sur a oeste y norte
-                    irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaSur(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-                case 14: //De sur a este y oeste
-                    irRutaOeste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    irRutaEste(nuevocodPJ, nuevasCasillas, nuevaX, nuevaY);
-                    break;
-            }
-            } else {
-                //ruta.clear();
-                //ruta.remove(ruta.size()-1);
-            }
-            
+
+    private void calcularRuta(String direccion, int size, int casillas, int nuevaX, int nuevaY, int nuevocodPJ) {
+        /*if(nuevocodPJ == 3 &&
+                nuevocodPJ == 6 ||
+                nuevocodPJ == 8 ||
+                nuevocodPJ == 10 ||
+                nuevocodPJ == 11 ||
+                nuevocodPJ == 12 ||
+                nuevocodPJ == 13)*/
+        System.out.println("MOVI " + movi + "CASI " + casillas);
+        if(movi==casillas)
+                    ruta2.add(direccion);
+        System.out.println("TAMAÑO: " + size + " " + ruta2.size() + ruta2);
+        if(size<casillas) {
+            rutas.add(ruta2);
+            ruta2.clear();
         }
     }
 
-    public void calcularRuta2(int xDest, int yDest, int codCasilla) {
-        //Posiciones del PJ escogido - Vemos en el ArrayList la posición del PJ
-        posPJx = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosX();
-        posPJy = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getPosY();
-        //Guardamos el movimiento en una variable para tener un acceso más rápido
-        movi = Dark.ventanaInicio.personajesBando1.get(Dark.ventanaInicio.PJ).getMov();
+    private void calculaRuta() {
+        //Hay tantas rutas como elementos del combo
+        int elementos = jComboBox1_1.getItemCount();
+        System.out.println("ELEMENTOS:" + elementos);
+        //Calculamos las casillas que se ha movido el PJ
         
-        rutaCalculada = false;
-        switch(codCasilla) {
-            case 1:
-                //irRutaNorte(codPJ, movi, posPJx, posPJy);
-                break;
-            case 2:
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 3:
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 4:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 5:
-                //irRutaNorte(codPJ, movi, posPJx, posPJy);
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 6:
-                if(!rutaCalculada) irRutaNorte(codPJ, movi, posPJx, posPJy);
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 7:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                //irRutaNorte(codPJ, movi, posPJx, posPJy);
-                break;
-            case 8:
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 9:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 10:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 11:
-                //irRutaNorte(codPJ, movi, posPJx, posPJy);
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 12:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
-            case 13:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                //irRutaNorte(codPJ, movi, posPJx, posPJy);
-                //irRutaSur(codPJ, movi, posPJx, posPJy);
-                break;
-            case 14:
-                //irRutaOeste(codPJ, movi, posPJx, posPJy);
-                //irRutaNorte(codPJ, movi, posPJx, posPJy);
-                //irRutaEste(codPJ, movi, posPJx, posPJy);
-                break;
         
-        /*int movX = xDest - posPJx;
-        int movY = yDest - posPJy;
         
-        if(movX==0) { //No hay movimiento horizontal 
-            System.out.println("X VALE 0");
-            for(int x=0; x<movi; x++) {
-                ruta2.add("Norte");
-            }
-        }*/
-        }
-
+        System.out.println("EL PJ VA desde " + posPJx + ":" + posPJy + "HASTA " + posPJxFinal + ":" + posPJyFinal);
+        System.out.println(casillasMovidas);
     }
 }
 
